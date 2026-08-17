@@ -112,7 +112,6 @@ export const ms: Dict = {
       gym: 'Gimnasium',
       multipurposeHall: 'Dewan serbaguna',
       joggingTrack: 'Trek joging',
-      bbqArea: 'Kawasan BBQ',
       playground: 'Taman permainan',
       yogaZone: 'Zon yoga',
       sunDeck: 'Dek berjemur',
@@ -168,6 +167,7 @@ export const ms: Dict = {
       'Pintu masuk berkawal dengan pendaftaran tetamu di pondok pengawal',
       'Kafe, klinik dan barang dapur di Tingkat 1 dan 2 — tanpa perlu kereta',
       'Berjalan 500 m ke stesen KTM Komuter UKM',
+      'Stesen MRT Kajang 11 minit sahaja — bas perantara MRT T464 beroperasi sepanjang laluan, menghubungkan Vista Bangi terus ke kawasan MRT Kajang dan sebaliknya',
       'Kolam, gim dan dek kemudahan disediakan untuk tetamu',
     ],
     cta: 'Lihat senarai sewa pendek',
@@ -188,5 +188,6 @@ export const ms: Dict = {
     sections: 'Bahagian',
     disclaimer:
       'Maklumat bangunan diterbitkan dengan niat baik dan mungkin dikemas kini. Senarai sewa pendek individu dikendalikan secara berasingan daripada pengurusan bangunan.',
+    sponsoredBy: 'Ditaja oleh',
   },
 };

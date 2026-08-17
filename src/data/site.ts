@@ -42,7 +42,6 @@ export const BUILDING = {
  * 7-Eleven outlets in the podium), all of which give 43000 Kajang.
  */
 export const ADDRESS = {
-  streetNumber: '18',
   street: 'Jalan Reko',
   locality: 'Taman Sri Reko',
   city: 'Kajang',
@@ -52,10 +51,16 @@ export const ADDRESS = {
   countryCode: 'MY',
 } as const;
 
-/** Formatted single-line address used in copy, JSON-LD and map links. */
+/**
+ * Formatted single-line address used in the footer, the location section,
+ * JSON-LD and the copy-to-clipboard button.
+ *
+ * The street number ("18") that appears on some property listings is omitted
+ * here at management's direction.
+ */
 export const ADDRESS_LINE = [
   BUILDING.name,
-  `${ADDRESS.streetNumber}, ${ADDRESS.street}`,
+  ADDRESS.street,
   ADDRESS.locality,
   `${ADDRESS.postcode} ${ADDRESS.city}`,
   ADDRESS.state,
@@ -97,17 +102,23 @@ export const TRANSPORT = [
 export const HIGHWAYS = ['SILK', 'LEKAS', 'MEX', 'PLUS', 'KLIA Expressway'] as const;
 
 /**
- * Contact details.
+ * Vista Bangi management office contacts.
  *
- * ⚠️ ALL PLACEHOLDERS. Replace with the real management office / short-stay
- * contacts. `null` entries are omitted from the page and from JSON-LD rather
- * than shown as empty, so it is safe to leave them unset.
+ * A `null` entry is omitted from the page and from JSON-LD rather than shown as
+ * empty, so it is safe to leave one unset. The same number serves as phone and
+ * WhatsApp; `whatsapp` is stored as bare digits for the wa.me link.
  */
 export const CONTACT = {
-  managementPhone: null as string | null, // e.g. '+60312345678'
-  managementEmail: null as string | null, // e.g. 'management@vistabangi.com'
-  whatsapp: null as string | null, // digits only, intl format e.g. '60123456789'
-  officeHours: null as string | null, // e.g. 'Mon–Fri 9:00–17:00, Sat 9:00–13:00'
+  managementPhone: '+60 11-3675 9979' as string | null,
+  managementEmail: 'vbmgmt22@gmail.com' as string | null,
+  whatsapp: '601136759979' as string | null,
+  officeHours: '9:00 AM – 5:30 PM' as string | null,
+} as const;
+
+/** Site sponsor, credited in the footer and on the splash screen. */
+export const SPONSOR = {
+  name: 'Al Fateh Digital',
+  url: 'https://www.alfatehdigital.com.my/',
 } as const;
 
 export const SOCIAL = {

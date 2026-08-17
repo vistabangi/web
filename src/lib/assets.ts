@@ -69,7 +69,9 @@ export function resolveBrandAssets(): BrandAssets {
 export function resolveShopLogos(): Record<string, string> {
   const logos: Record<string, string> = {};
   for (const tenant of TENANTS) {
-    const found = firstPresent(IMAGE_EXTENSIONS.map((e) => `images/shops/${tenant.id}.${e}`));
+    // `logoFile` wins when the supplied file name differs from the tenant id.
+    const base = tenant.logoFile ?? tenant.id;
+    const found = firstPresent(IMAGE_EXTENSIONS.map((e) => `images/shops/${base}.${e}`));
     if (found) logos[tenant.id] = found;
   }
   return logos;

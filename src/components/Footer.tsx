@@ -1,4 +1,4 @@
-import { ADDRESS_LINE, CONTACT } from '../data/site';
+import { ADDRESS_LINE, CONTACT, SPONSOR } from '../data/site';
 import { Wordmark } from './Wordmark';
 import { localeHref, LOCALES, LOCALE_NAMES, type Dict, type Locale } from '../i18n';
 
@@ -99,9 +99,22 @@ export function Footer({ locale, dict, logo, year }: Props) {
       </div>
 
       <div className="border-t border-ink-800">
-        <div className="shell flex flex-col gap-3 py-7 text-xs text-ink-400">
-          <p>{dict.footer.rights(year)}</p>
-          <p className="max-w-3xl leading-relaxed">{dict.footer.disclaimer}</p>
+        <div className="shell flex flex-col gap-4 py-7 text-xs text-ink-400 md:flex-row md:items-start md:justify-between">
+          <div className="flex flex-col gap-3">
+            <p>{dict.footer.rights(year)}</p>
+            <p className="max-w-3xl leading-relaxed">{dict.footer.disclaimer}</p>
+          </div>
+          <p className="shrink-0 md:text-right">
+            {dict.footer.sponsoredBy}{' '}
+            <a
+              href={SPONSOR.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-gold-400 underline decoration-gold-700 underline-offset-4 transition-colors hover:text-gold-300"
+            >
+              {SPONSOR.name}
+            </a>
+          </p>
         </div>
       </div>
     </footer>

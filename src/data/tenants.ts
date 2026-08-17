@@ -12,11 +12,13 @@
  *  renders with a dashed border and a "to be confirmed" badge. Delete the flag
  *  once checked.
  *
- *  SHOP LOGOS: drop a square image at `public/images/shops/<id>.png` — the file
- *  name must match the entry's `id`. It is picked up automatically on the next
- *  build (see src/lib/assets.ts). Outlets without a logo file render an empty
- *  circle, so the row stays aligned either way. `.png`, `.jpg`, `.jpeg`, `.svg`
- *  and `.webp` are all recognised.
+ *  SHOP LOGOS: drop a square image in `public/images/shops/`. By default the file
+ *  name must match the entry's `id` (e.g. `dentacity.png`); when it does not,
+ *  set `logoFile` to the base name instead (e.g. `logoFile: 'zus'` for
+ *  `zus.png`). Either way it is picked up on the next build — see
+ *  src/lib/assets.ts. Outlets without a logo file render an empty circle, so the
+ *  row stays aligned either way. `.png`, `.jpg`, `.jpeg`, `.svg` and `.webp` are
+ *  all recognised.
  *
  *  Unit numbering follows the building's scheme: Level 1 lots are `1-xx`,
  *  Level 2 lots are `2-xx`.
@@ -51,6 +53,11 @@ export interface Tenant {
   readonly url?: string;
   /** Google listing for the outlet. Optional. */
   readonly mapUrl?: string;
+  /**
+   * Base name of the logo file in `public/images/shops/`, without extension.
+   * Only needed when it differs from `id`.
+   */
+  readonly logoFile?: string;
   /** Present = details unconfirmed. Remove once checked on site. */
   readonly placeholder?: true;
 }
@@ -77,12 +84,14 @@ export const TENANTS: readonly Tenant[] = [
     id: 'rbs-1-bistro',
     name: 'RBS 1 Bistro',
     category: 'fnb',
+    logoFile: 'rbs',
     mapUrl: 'https://share.google/iigcWiy65bVXxLYkk',
   },
   {
     id: 'restoran-madame',
     name: 'Restoran Madame',
     category: 'fnb',
+    logoFile: 'madame',
     mapUrl: 'https://share.google/JzZnrhXNHoNnHT9Ry',
   },
   {
@@ -91,7 +100,19 @@ export const TENANTS: readonly Tenant[] = [
     category: 'fnb',
     floor: 1,
     unit: '1-06',
+    logoFile: 'zus',
     url: 'https://zuscoffee.com/2024/03/07/zus-coffee-vista-bangi-jalan-reko/',
+  },
+  {
+    // Google lists this outlet as "CAFÉ by 7-Eleven Vista Bangi (#2939)" — the
+    // café-format store rather than a plain convenience branch.
+    id: 'seven-eleven',
+    name: 'CAFÉ by 7-Eleven',
+    category: 'fnb',
+    floor: 1,
+    unit: '1-07',
+    logoFile: '7-eleven',
+    mapUrl: 'https://share.google/OVvomaMjE4blVg2XK',
   },
 
   // ── Clinics ──────────────────────────────────────────────────────────────
@@ -99,6 +120,7 @@ export const TENANTS: readonly Tenant[] = [
     id: 'klinik-iman-medic',
     name: 'Klinik Iman Medic',
     category: 'health',
+    logoFile: 'iman-medic',
     mapUrl: 'https://share.google/Bh6pIi742UUcgF5h8',
   },
   {
@@ -113,6 +135,7 @@ export const TENANTS: readonly Tenant[] = [
     id: 'bangi-dental-cottage',
     name: 'Bangi Dental Cottage',
     category: 'dental',
+    logoFile: 'dental-cottage',
     mapUrl: 'https://share.google/H91TLl3UHvNBAvuQv',
   },
   {
@@ -127,18 +150,21 @@ export const TENANTS: readonly Tenant[] = [
     id: 'tadika-nimblebee',
     name: 'Tadika Nimblebee',
     category: 'education',
+    logoFile: 'nimblebee',
     mapUrl: 'https://share.google/kmoenjNDifWGfty50',
   },
   {
     id: 'al-kauthar-eduqids',
     name: 'Al Kauthar Eduqids Playschool',
     category: 'education',
+    logoFile: 'al-kauthar',
     mapUrl: 'https://share.google/jCYqmKCeLdCeKbNKF',
   },
   {
     id: 'the-childtime',
     name: 'The ChildTime Preschool',
     category: 'education',
+    logoFile: 'the-child-time',
     mapUrl: 'https://share.google/W6wN73ooFvxIHKmu0',
   },
 
@@ -151,7 +177,6 @@ export const TENANTS: readonly Tenant[] = [
   },
 
   // ── Retail & groceries ───────────────────────────────────────────────────
-  { id: 'seven-eleven', name: '7-Eleven', category: 'retail', floor: 1, unit: '1-07' },
   {
     id: 'eco-shop',
     name: 'eco-shop',
@@ -159,8 +184,20 @@ export const TENANTS: readonly Tenant[] = [
     unit: '1-08 – 1-11, 2-08 – 2-11',
     url: 'https://www.eco-shop.com.my/store-locator',
   },
-  { id: '99-speedmart', name: '99 Speedmart', category: 'grocery', placeholder: true },
-  { id: 'kk-mart', name: 'KK Mart', category: 'retail', placeholder: true },
+  {
+    // Google: "99 Speedmart 2924 Vista Bangi".
+    id: '99-speedmart',
+    name: '99 Speedmart',
+    category: 'grocery',
+    mapUrl: 'https://share.google/gSTPikK5rJzkzzWiN',
+  },
+  {
+    // Google: "KK Mart Concept Store Residence - Vista Bangi (RVB)".
+    id: 'kk-mart',
+    name: 'KK Mart Concept Store',
+    category: 'retail',
+    mapUrl: 'https://share.google/r87pQWBYAxQhcVDSa',
+  },
 ];
 
 /** Verified entries first, then alphabetical within each group. */

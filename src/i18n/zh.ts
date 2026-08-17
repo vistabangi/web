@@ -117,7 +117,6 @@ export const zh: Dict = {
       gym: '健身房',
       multipurposeHall: '多用途礼堂',
       joggingTrack: '跑道',
-      bbqArea: '烧烤区',
       playground: '儿童游乐场',
       yogaZone: '瑜伽区',
       sunDeck: '日光浴平台',
@@ -172,6 +171,7 @@ export const zh: Dict = {
       '受管制出入口，访客于保安亭登记',
       '第 1、2 层设有咖啡馆、诊所与杂货 —— 无需开车',
       '步行 500 米即达 UKM KTM 通勤站',
+      '距加影 MRT 站 11 分钟 —— T464 号 MRT 接驳巴士全程环线运行，往返直连 Vista Bangi 与加影 MRT 一带',
       '住客可使用泳池、健身房与设施层',
     ],
     cta: '查看短租房源',
@@ -192,5 +192,6 @@ export const zh: Dict = {
     sections: '网站栏目',
     disclaimer:
       '建筑资料本着诚信发布，日后可能更新。个别短租房源由房东独立经营，与大楼管理层无关。',
+    sponsoredBy: '赞助单位',
   },
 };

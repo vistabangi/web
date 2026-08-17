@@ -112,7 +112,6 @@ export const en: Dict = {
       gym: 'Gymnasium',
       multipurposeHall: 'Multipurpose hall',
       joggingTrack: 'Jogging track',
-      bbqArea: 'BBQ area',
       playground: 'Playground',
       yogaZone: 'Yoga zone',
       sunDeck: 'Sun deck',
@@ -168,6 +167,7 @@ export const en: Dict = {
       'Guarded entry with guest registration at the guardhouse',
       'Cafés, clinics and groceries on Levels 1 and 2 — no car needed',
       '500 m walk to UKM KTM Komuter station',
+      'MRT Kajang station 11 minutes away — the T464 MRT feeder bus runs the full loop, connecting Vista Bangi directly to the MRT Kajang area and back',
       'Pool, gym and facilities deck included for guests',
     ],
     cta: 'View short-stay listings',
@@ -188,5 +188,6 @@ export const en: Dict = {
     sections: 'Sections',
     disclaimer:
       'Building details are published in good faith and may be revised. Individual short-stay listings are operated independently of building management.',
+    sponsoredBy: 'Sponsored by',
   },
 };

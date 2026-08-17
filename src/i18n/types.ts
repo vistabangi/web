@@ -154,5 +154,7 @@ export interface Dict {
     readonly rights: (year: number) => string;
     readonly sections: string;
     readonly disclaimer: string;
+    /** Precedes the sponsor name in the footer and on the splash screen. */
+    readonly sponsoredBy: string;
   };
 }
