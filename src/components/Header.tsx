@@ -41,18 +41,21 @@ export function Header({ locale, dict, logo }: Props) {
         </nav>
 
         <div className="flex items-center gap-2">
-          <LangSwitcher locale={locale} dict={dict} tone="dark" />
+          {/* Desktop only — see the note in LangSwitcher on why. */}
+          <div className="hidden xl:block">
+            <LangSwitcher locale={locale} dict={dict} variant="pills" tone="dark" />
+          </div>
 
           {/* Checkbox toggle: the mobile menu needs no JavaScript at all. */}
           <input id="nav-toggle" type="checkbox" className="peer sr-only" />
           <label
             htmlFor="nav-toggle"
-            className="cursor-pointer rounded-md p-2 text-ink-200 transition-colors hover:text-gold-300 xl:hidden"
+            className="-mr-2 cursor-pointer rounded-md p-2 text-ink-200 transition-colors hover:text-gold-300 xl:hidden"
             aria-label={dict.nav.menu}
           >
             <svg
-              width="22"
-              height="22"
+              width="24"
+              height="24"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -63,19 +66,36 @@ export function Header({ locale, dict, logo }: Props) {
             </svg>
           </label>
 
-          <div className="absolute inset-x-0 top-20 hidden bg-ink-900 peer-checked:block xl:hidden!">
-            <div className="rule-gold" />
-            <nav aria-label={dict.nav.menu} className="shell grid gap-1 py-4">
-              {links.map((l) => (
-                <a
-                  key={l.id}
-                  href={`#${l.id}`}
-                  className="rounded-md px-3 py-2.5 text-base text-ink-200 transition-colors hover:text-gold-300"
-                >
-                  {l.label}
-                </a>
-              ))}
-            </nav>
+          <div
+            className="absolute inset-x-0 top-20 hidden max-h-[calc(100dvh-5rem)] overflow-y-auto bg-ink-900 peer-checked:block xl:hidden!"
+          >
+            <div className="shell py-5">
+              {/* Language first: with four locales it is the thing a visitor is
+                  most likely to be hunting for on a narrow screen. */}
+              <p className="px-3 text-[0.6875rem] font-semibold tracking-[0.18em] text-gold-400 uppercase">
+                {dict.nav.language}
+              </p>
+              <div className="mt-2">
+                <LangSwitcher locale={locale} dict={dict} variant="list" tone="dark" />
+              </div>
+
+              <div className="my-5 h-px bg-ink-800" />
+
+              <p className="px-3 text-[0.6875rem] font-semibold tracking-[0.18em] text-gold-400 uppercase">
+                {dict.footer.sections}
+              </p>
+              <nav aria-label={dict.nav.menu} className="mt-2 grid gap-1">
+                {links.map((l) => (
+                  <a
+                    key={l.id}
+                    href={`#${l.id}`}
+                    className="rounded-md px-3 py-2.5 text-base text-ink-200 transition-colors hover:bg-ink-800 hover:text-gold-300"
+                  >
+                    {l.label}
+                  </a>
+                ))}
+              </nav>
+            </div>
           </div>
         </div>
       </div>
