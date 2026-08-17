@@ -1,0 +1,187 @@
+import type { Dict } from './types';
+
+export const ms: Dict = {
+  meta: {
+    title: 'Vista Bangi Service Apartment — Jalan Reko, Selangor',
+    description:
+      'Laman web rasmi Vista Bangi Service Apartment: dua blok 38 tingkat di Jalan Reko, Selangor, dengan podium kedai dua tingkat, kemudahan lengkap, keselamatan berpagar 24 jam dan CCTV. Sesuai untuk penginapan jangka pendek dan Airbnb.',
+    ogAlt: 'Vista Bangi Service Apartment, Jalan Reko, Selangor',
+  },
+  nav: {
+    home: 'Utama',
+    shops: 'Kedai',
+    units: 'Kediaman',
+    facilities: 'Kemudahan',
+    security: 'Keselamatan',
+    location: 'Lokasi',
+    stay: 'Sewa Pendek',
+    contact: 'Hubungi',
+    menu: 'Menu',
+    closeMenu: 'Tutup menu',
+    language: 'Bahasa',
+    skipToContent: 'Terus ke kandungan',
+  },
+  hero: {
+    eyebrow: 'Jalan Reko · Bandar Baru Bangi · Selangor',
+    title: 'Vista Bangi Service Apartment',
+    subtitle:
+      'Kediaman servis pegangan bebas dengan dua menara 38 tingkat, terletak di atas podium kedai dua tingkatnya sendiri — dengan keselamatan berkawal 24 jam, CCTV di seluruh kawasan, dan unit sewa jangka pendek yang tersedia.',
+    ctaPrimary: 'Cari kami di peta',
+    ctaSecondary: 'Lihat senarai kedai',
+    statFloors: 'Tingkat setiap blok',
+    statBlocks: 'Blok kediaman',
+    statRetail: 'Tingkat kedai',
+    statTenure: 'Pegangan',
+  },
+  highlights: {
+    title: 'Mengapa Vista Bangi',
+    intro: 'Keperluan harian di bawah, stesen Komuter beberapa minit sahaja, dan lobi berkawal di antaranya.',
+    items: [
+      {
+        title: 'Kedai betul-betul di bawah',
+        body: 'Tingkat 1 dan 2 membentuk podium komersial — barang dapur, makanan, farmasi dan perkhidmatan hanya sejauh satu perjalanan lif, tanpa perlu memandu.',
+      },
+      {
+        title: '500 m ke Komuter UKM',
+        body: 'Berjalan kaki ke stesen KTM Komuter dan terus berhubung ke Kajang, KL Sentral dan Seremban tanpa menyentuh lebuh raya.',
+      },
+      {
+        title: 'Berkawal, siang dan malam',
+        body: 'Satu pintu masuk terkawal, pengawal bertugas 24 jam, dan CCTV di seluruh kawasan umum, lobi dan tempat letak kereta.',
+      },
+      {
+        title: 'Sesuai juga untuk sewa pendek',
+        body: 'Unit berperabot dikendalikan sebagai sewaan Airbnb dan jangka pendek, dengan pendaftaran pelawat diuruskan di pondok pengawal.',
+      },
+    ],
+  },
+  floors: {
+    title: 'Kedai & perniagaan',
+    intro:
+      'Dua tingkat kedai terletak tepat di bawah kediaman. Tapis mengikut keperluan anda, atau lihat tingkat demi tingkat.',
+    level: (n) => `Tingkat ${n}`,
+    levelLead: {
+      1: 'Kedai aras bawah — keperluan harian, makanan dan barangan mudah.',
+      2: 'Perkhidmatan dan temu janji — klinik, pembelajaran, kesihatan dan pejabat.',
+    },
+    filterAll: 'Semua',
+    filterLabel: 'Tapis mengikut kategori',
+    unitLabel: 'Lot',
+    hoursLabel: 'Waktu',
+    callLabel: 'Hubungi',
+    toBeConfirmed: 'Nama akan dikemas kini',
+    placeholderNotice:
+      'Direktori ini sedang dikumpulkan. Entri di bawah menunjukkan jenis perniagaan di setiap lot; nama perniagaan sedang disemak bersama pejabat pengurusan.',
+    emptyFiltered: 'Tiada perniagaan dalam kategori ini di tingkat ini.',
+    categories: {
+      fnb: 'Makanan & minuman',
+      grocery: 'Barangan dapur',
+      health: 'Kesihatan',
+      beauty: 'Kecantikan & kesejahteraan',
+      services: 'Perkhidmatan',
+      retail: 'Peruncitan',
+      education: 'Pendidikan',
+      laundry: 'Dobi',
+    },
+  },
+  units: {
+    title: 'Kediaman',
+    intro: 'Susun atur studio hingga tiga bilik tidur di Blok A dan Blok B.',
+    studio: 'Studio',
+    bedrooms: (n) => `${n} bilik tidur`,
+    bathrooms: (n) => `${n} bilik mandi`,
+    sqft: (min, max) => `${min}–${max} kaki persegi`,
+    blockTitle: 'Dua menara, Blok A dan Blok B',
+    blockBody:
+      'Kedua-dua blok menjulang 38 tingkat di atas podium dan dek kemudahan yang dikongsi, dengan teras lif dan lobi tersendiri.',
+    floorsLabel: 'Tingkat',
+    unitsLabel: 'Unit',
+    unitsTbc: 'Akan dikemas kini',
+  },
+  facilities: {
+    title: 'Kemudahan',
+    intro: 'Dek kemudahan lengkap yang dikongsi oleh kedua-dua blok.',
+    labels: {
+      swimmingPool: 'Kolam renang',
+      kidsPool: 'Kolam kanak-kanak',
+      gym: 'Gimnasium',
+      multipurposeHall: 'Dewan serbaguna',
+      joggingTrack: 'Trek joging',
+      bbqArea: 'Kawasan BBQ',
+      playground: 'Taman permainan',
+      yogaZone: 'Zon yoga',
+      sunDeck: 'Dek berjemur',
+      library: 'Perpustakaan',
+      nursery: 'Taman asuhan',
+      pingPong: 'Ping pong',
+      parking: 'Tempat letak kereta berbumbung',
+      lifts: 'Lif penumpang',
+      surauNearby: 'Surau',
+    },
+  },
+  security: {
+    title: 'Keselamatan',
+    intro: 'Berkawal dan dipantau sepanjang masa.',
+    guarded: {
+      title: 'Pengawal 24 jam',
+      body: 'Kakitangan keselamatan bertugas di pondok pengawal pada setiap masa, dengan rondaan di seluruh kawasan dan tempat letak kereta.',
+    },
+    cctv: {
+      title: 'Pengawasan CCTV',
+      body: 'Kamera merangkumi pintu masuk, lobi, perhentian lif, dek kemudahan dan aras parkir, dengan rakaman berterusan.',
+    },
+    access: {
+      title: 'Akses terkawal',
+      body: 'Akses lobi dan lif dikawal dengan kad, jadi hanya penduduk dan pelawat berdaftar sampai ke tingkat kediaman.',
+    },
+    visitor: {
+      title: 'Pendaftaran pelawat',
+      body: 'Pelawat dan tetamu sewa pendek mendaftar di pondok pengawal semasa masuk — memudahkan tuan rumah, menenangkan jiran.',
+    },
+  },
+  location: {
+    title: 'Lokasi',
+    intro: 'Di Jalan Reko, antara Bandar Baru Bangi dan Kajang.',
+    addressLabel: 'Alamat',
+    directions: 'Dapatkan arah',
+    openInMaps: 'Buka dalam Google Maps',
+    copyAddress: 'Salin alamat',
+    copied: 'Telah disalin',
+    mapTitle: 'Peta menunjukkan lokasi Vista Bangi Service Apartment',
+    nearbyTitle: 'Berdekatan',
+    highwaysTitle: 'Akses lebuh raya',
+    km: (n) => (n < 1 ? `${Math.round(n * 1000)} m` : `${n} km`),
+    pinNotice:
+      'Peta ini mengesan bangunan mengikut nama. Koordinat pin tepat sedang disemak dan akan diterbitkan di sini.',
+  },
+  stay: {
+    title: 'Sewa pendek & Airbnb',
+    intro:
+      'Unit berperabot di kedua-dua blok disewakan secara harian dan jangka pendek, sesuai untuk keluarga yang berkunjung, tetamu UKM dan kontraktor yang bekerja berdekatan.',
+    points: [
+      'Susun atur studio dan keluarga berperabot, disewa secara harian',
+      'Pintu masuk berkawal dengan pendaftaran tetamu di pondok pengawal',
+      'Kedai, makanan dan barang dapur di Tingkat 1 dan 2 — tanpa perlu kereta',
+      'Berjalan 500 m ke stesen KTM Komuter UKM',
+      'Kolam, gim dan dek kemudahan disediakan untuk tetamu',
+    ],
+    cta: 'Lihat senarai sewa pendek',
+    ctaNote: 'Pautan senarai diterbitkan oleh tuan rumah dan pengendali masing-masing.',
+  },
+  contact: {
+    title: 'Hubungi',
+    intro: 'Untuk pertanyaan pengurusan, penyelenggaraan dan penyewaan.',
+    phone: 'Telefon',
+    email: 'E-mel',
+    whatsapp: 'WhatsApp',
+    hours: 'Waktu pejabat',
+    tbc: 'Akan diterbitkan',
+  },
+  footer: {
+    tagline: 'Apartmen servis · Jalan Reko, Selangor',
+    rights: (year) => `© ${year} Vista Bangi Service Apartment. Hak cipta terpelihara.`,
+    sections: 'Bahagian',
+    disclaimer:
+      'Maklumat bangunan diterbitkan dengan niat baik dan mungkin dikemas kini. Senarai sewa pendek individu dikendalikan secara berasingan daripada pengurusan bangunan.',
+  },
+};

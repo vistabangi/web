@@ -1,0 +1,61 @@
+---
+import type { Dict } from '../i18n';
+import { BUILDING } from '../data/site';
+import { UNIT_TYPES } from '../data/facilities';
+
+interface Props {
+  dict: Dict;
+}
+
+const { dict } = Astro.props;
+
+function layoutName(bedrooms: number): string {
+  return bedrooms === 0 ? dict.units.studio : dict.units.bedrooms(bedrooms);
+}
+---
+
+<section id="residences" class="shell scroll-mt-24 py-20" aria-labelledby="residences-title">
+  <h2 id="residences-title" class="section-title">{dict.units.title}</h2>
+  <p class="prose-lead mt-4">{dict.units.intro}</p>
+
+  <ul class="mt-12 grid gap-6 md:grid-cols-3">
+    {
+      UNIT_TYPES.map((u) => (
+        <li class="card flex flex-col p-6">
+          <p class="font-display text-xl text-ink-900">{layoutName(u.bedrooms)}</p>
+          <p class="mt-1 text-sm text-ink-600">{dict.units.bathrooms(u.bathrooms)}</p>
+          <p class="mt-auto pt-6 text-sm font-semibold tracking-wide text-brass-600">
+            {dict.units.sqft(u.sqftMin, u.sqftMax)}
+          </p>
+        </li>
+      ))
+    }
+  </ul>
+
+  <div class="mt-14 rounded-card bg-ink-900 p-8 text-white md:p-10">
+    <h3 class="font-display text-2xl">{dict.units.blockTitle}</h3>
+    <p class="mt-3 max-w-2xl text-sm leading-relaxed text-ink-100">{dict.units.blockBody}</p>
+
+    <div class="mt-8 grid gap-4 sm:grid-cols-2">
+      {
+        BUILDING.blocks.map((b) => (
+          <div class="rounded-lg border border-ink-700 p-5">
+            <p class="font-display text-lg text-brass-300">{b.name}</p>
+            <dl class="mt-3 grid grid-cols-2 gap-4 text-sm">
+              <div>
+                <dt class="text-xs tracking-wide text-ink-400 uppercase">{dict.units.floorsLabel}</dt>
+                <dd class="mt-0.5 text-xl text-white">{b.floors}</dd>
+              </div>
+              <div>
+                <dt class="text-xs tracking-wide text-ink-400 uppercase">{dict.units.unitsLabel}</dt>
+                <dd class:list={['mt-0.5', b.units ? 'text-xl text-white' : 'text-sm text-ink-400']}>
+                  {b.units ?? dict.units.unitsTbc}
+                </dd>
+              </div>
+            </dl>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

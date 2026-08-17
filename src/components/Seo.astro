@@ -1,0 +1,84 @@
+---
+import { canonicalUrl, HTML_LANG, LOCALES, type Dict, type Locale } from '../i18n';
+import { ADDRESS, BUILDING, CONTACT, COORDINATES, OG_IMAGE, SECURITY, SITE_URL } from '../data/site';
+
+interface Props {
+  locale: Locale;
+  dict: Dict;
+}
+
+const { locale, dict } = Astro.props;
+const canonical = canonicalUrl(locale, SITE_URL);
+
+// Schema.org. `ApartmentComplex` is the accurate type for the building; the
+// short-stay operation is expressed via amenityFeature rather than by claiming
+// the building itself is a LodgingBusiness.
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ApartmentComplex',
+  name: BUILDING.name,
+  alternateName: BUILDING.shortName,
+  url: canonical,
+  description: dict.meta.description,
+  numberOfFloors: BUILDING.floors,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: ADDRESS.street,
+    addressLocality: ADDRESS.city,
+    addressRegion: ADDRESS.state,
+    postalCode: ADDRESS.postcode,
+    addressCountry: ADDRESS.countryCode,
+  },
+  // Omitted entirely rather than guessed when coordinates are not yet surveyed.
+  ...(COORDINATES
+    ? { geo: { '@type': 'GeoCoordinates', latitude: COORDINATES.lat, longitude: COORDINATES.lng } }
+    : {}),
+  ...(CONTACT.managementPhone ? { telephone: CONTACT.managementPhone } : {}),
+  ...(CONTACT.managementEmail ? { email: CONTACT.managementEmail } : {}),
+  amenityFeature: [
+    ...(SECURITY.guarded24h
+      ? [{ '@type': 'LocationFeatureSpecification', name: '24-hour security', value: true }]
+      : []),
+    ...(SECURITY.cctv
+      ? [{ '@type': 'LocationFeatureSpecification', name: 'CCTV surveillance', value: true }]
+      : []),
+    { '@type': 'LocationFeatureSpecification', name: 'Swimming pool', value: true },
+    { '@type': 'LocationFeatureSpecification', name: 'Gym', value: true },
+    { '@type': 'LocationFeatureSpecification', name: 'Covered parking', value: true },
+  ],
+};
+---
+
+<title>{dict.meta.title}</title>
+<meta name="description" content={dict.meta.description} />
+<link rel="canonical" href={canonical} />
+
+{/* hreflang set: every locale plus x-default pointing at the English root. */}
+{
+  LOCALES.map((l) => (
+    <link rel="alternate" hreflang={HTML_LANG[l]} href={canonicalUrl(l, SITE_URL)} />
+  ))
+}
+<link rel="alternate" hreflang="x-default" href={canonicalUrl('en', SITE_URL)} />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={BUILDING.name} />
+<meta property="og:title" content={dict.meta.title} />
+<meta property="og:description" content={dict.meta.description} />
+<meta property="og:url" content={canonical} />
+<meta property="og:locale" content={HTML_LANG[locale].replace('-', '_')} />
+{
+  OG_IMAGE && (
+    <>
+      <meta property="og:image" content={new URL(OG_IMAGE, SITE_URL).href} />
+      <meta property="og:image:alt" content={dict.meta.ogAlt} />
+      <meta name="twitter:card" content="summary_large_image" />
+    </>
+  )
+}
+
+<meta name="geo.region" content="MY-10" />
+<meta name="geo.placename" content={`${ADDRESS.locality}, ${ADDRESS.city}`} />
+<meta name="format-detection" content="telephone=no" />
+
+<script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />

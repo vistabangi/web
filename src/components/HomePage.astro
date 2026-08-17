@@ -1,0 +1,33 @@
+---
+/**
+ * The full home page body, shared by every locale route so the three pages in
+ * src/pages/ stay one line each and cannot drift apart structurally.
+ */
+import Hero from './Hero.astro';
+import Highlights from './Highlights.astro';
+import Floors from './Floors.astro';
+import Residences from './Residences.astro';
+import Facilities from './Facilities.astro';
+import Security from './Security.astro';
+import Location from './Location.astro';
+import ShortStay from './ShortStay.astro';
+import Contact from './Contact.astro';
+import { getDict, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const dict = getDict(locale);
+---
+
+<Hero dict={dict} />
+<Highlights dict={dict} />
+<Floors dict={dict} />
+<Residences dict={dict} />
+<Facilities dict={dict} />
+<Security dict={dict} />
+<Location dict={dict} />
+<ShortStay dict={dict} />
+<Contact dict={dict} />

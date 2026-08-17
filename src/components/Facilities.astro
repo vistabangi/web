@@ -1,0 +1,45 @@
+---
+import type { Dict } from '../i18n';
+import { FACILITIES } from '../data/facilities';
+
+interface Props {
+  dict: Dict;
+}
+
+const { dict } = Astro.props;
+---
+
+<section
+  id="facilities"
+  class="scroll-mt-24 border-y border-ink-100 bg-white py-20"
+  aria-labelledby="facilities-title"
+>
+  <div class="shell">
+    <h2 id="facilities-title" class="section-title">{dict.facilities.title}</h2>
+    <p class="prose-lead mt-4">{dict.facilities.intro}</p>
+
+    <ul class="mt-10 grid grid-cols-2 gap-x-6 gap-y-3 sm:grid-cols-3 lg:grid-cols-4">
+      {
+        FACILITIES.map((key) => (
+          <li class="flex items-center gap-2.5 border-b border-ink-100 py-2.5 text-sm text-ink-700">
+            <svg
+              class="shrink-0 text-brass-500"
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M20 6 9 17l-5-5" />
+            </svg>
+            {dict.facilities.labels[key]}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

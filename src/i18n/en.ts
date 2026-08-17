@@ -1,0 +1,187 @@
+import type { Dict } from './types';
+
+export const en: Dict = {
+  meta: {
+    title: 'Vista Bangi Service Apartment — Jalan Reko, Selangor',
+    description:
+      'Official site of Vista Bangi Service Apartment: two 38-storey blocks on Jalan Reko, Selangor, with a two-level shop podium, full facilities, 24-hour guarded security and CCTV. Short-stay and Airbnb friendly.',
+    ogAlt: 'Vista Bangi Service Apartment, Jalan Reko, Selangor',
+  },
+  nav: {
+    home: 'Home',
+    shops: 'Shops',
+    units: 'Residences',
+    facilities: 'Facilities',
+    security: 'Security',
+    location: 'Location',
+    stay: 'Short Stay',
+    contact: 'Contact',
+    menu: 'Menu',
+    closeMenu: 'Close menu',
+    language: 'Language',
+    skipToContent: 'Skip to content',
+  },
+  hero: {
+    eyebrow: 'Jalan Reko · Bandar Baru Bangi · Selangor',
+    title: 'Vista Bangi Service Apartment',
+    subtitle:
+      'A freehold serviced residence of two 38-storey towers, sitting above its own two-level shop podium — with 24-hour guarded security, CCTV throughout, and short-stay units available.',
+    ctaPrimary: 'Find us on the map',
+    ctaSecondary: 'Browse the shops',
+    statFloors: 'Storeys per block',
+    statBlocks: 'Residential blocks',
+    statRetail: 'Retail levels',
+    statTenure: 'Tenure',
+  },
+  highlights: {
+    title: 'Why Vista Bangi',
+    intro: 'Everyday needs downstairs, the Komuter line minutes away, and a secured lobby in between.',
+    items: [
+      {
+        title: 'Shops on your doorstep',
+        body: 'Levels 1 and 2 form a commercial podium — groceries, food, pharmacy and services are a lift ride from your unit, never a drive.',
+      },
+      {
+        title: '500 m to UKM Komuter',
+        body: 'Walk to the KTM Komuter station and connect straight through to Kajang, KL Sentral and Seremban without touching the highway.',
+      },
+      {
+        title: 'Guarded, day and night',
+        body: 'A single controlled entry point, 24-hour guards on duty and CCTV across the common areas, lobbies and car park.',
+      },
+      {
+        title: 'Built for short stays too',
+        body: 'Furnished units are operated as Airbnb and short-stay rentals, with visitor registration handled at the guardhouse.',
+      },
+    ],
+  },
+  floors: {
+    title: 'Shops & businesses',
+    intro:
+      'Two levels of retail sit directly beneath the residences. Filter by what you need, or browse level by level.',
+    level: (n) => `Level ${n}`,
+    levelLead: {
+      1: 'Ground-facing retail — daily essentials, food and convenience.',
+      2: 'Services and appointments — clinics, learning, wellness and offices.',
+    },
+    filterAll: 'All',
+    filterLabel: 'Filter by category',
+    unitLabel: 'Lot',
+    hoursLabel: 'Hours',
+    callLabel: 'Call',
+    toBeConfirmed: 'Name to be confirmed',
+    placeholderNotice:
+      'This directory is being compiled. Entries below show the type of business at each lot; trading names are being confirmed with the management office.',
+    emptyFiltered: 'No businesses in this category on this level.',
+    categories: {
+      fnb: 'Food & drink',
+      grocery: 'Groceries',
+      health: 'Health',
+      beauty: 'Beauty & wellness',
+      services: 'Services',
+      retail: 'Retail',
+      education: 'Education',
+      laundry: 'Laundry',
+    },
+  },
+  units: {
+    title: 'The residences',
+    intro: 'Studio to three-bedroom layouts across Block A and Block B.',
+    studio: 'Studio',
+    bedrooms: (n) => (n === 1 ? '1 bedroom' : `${n} bedrooms`),
+    bathrooms: (n) => (n === 1 ? '1 bathroom' : `${n} bathrooms`),
+    sqft: (min, max) => `${min}–${max} sq ft`,
+    blockTitle: 'Two towers, Block A and Block B',
+    blockBody:
+      'Both blocks rise 38 storeys above the shared podium and facilities deck, served by their own lift cores and lobbies.',
+    floorsLabel: 'Storeys',
+    unitsLabel: 'Units',
+    unitsTbc: 'To be confirmed',
+  },
+  facilities: {
+    title: 'Facilities',
+    intro: 'A full facilities deck shared by both blocks.',
+    labels: {
+      swimmingPool: 'Swimming pool',
+      kidsPool: "Children's pool",
+      gym: 'Gymnasium',
+      multipurposeHall: 'Multipurpose hall',
+      joggingTrack: 'Jogging track',
+      bbqArea: 'BBQ area',
+      playground: 'Playground',
+      yogaZone: 'Yoga zone',
+      sunDeck: 'Sun deck',
+      library: 'Library',
+      nursery: 'Nursery',
+      pingPong: 'Table tennis',
+      parking: 'Covered parking',
+      lifts: 'Passenger lifts',
+      surauNearby: 'Surau',
+    },
+  },
+  security: {
+    title: 'Security',
+    intro: 'Guarded and monitored around the clock.',
+    guarded: {
+      title: '24-hour guards',
+      body: 'Security personnel are on duty at the guardhouse at all hours, with patrols across the compound and car park.',
+    },
+    cctv: {
+      title: 'CCTV surveillance',
+      body: 'Cameras cover the entry point, lobbies, lift landings, facilities deck and parking levels, with footage recorded continuously.',
+    },
+    access: {
+      title: 'Controlled access',
+      body: 'Lobby and lift access is card-controlled, so only residents and registered guests reach the residential floors.',
+    },
+    visitor: {
+      title: 'Visitor registration',
+      body: 'Guests and short-stay arrivals register at the guardhouse on entry — useful for hosts, reassuring for neighbours.',
+    },
+  },
+  location: {
+    title: 'Location',
+    intro: 'On Jalan Reko, between Bandar Baru Bangi and Kajang.',
+    addressLabel: 'Address',
+    directions: 'Get directions',
+    openInMaps: 'Open in Google Maps',
+    copyAddress: 'Copy address',
+    copied: 'Copied',
+    mapTitle: 'Map showing the location of Vista Bangi Service Apartment',
+    nearbyTitle: 'Nearby',
+    highwaysTitle: 'Highway access',
+    km: (n) => (n < 1 ? `${Math.round(n * 1000)} m` : `${n} km`),
+    pinNotice:
+      'The map resolves this building by name. Exact pin coordinates are being surveyed and will be published here.',
+  },
+  stay: {
+    title: 'Short stays & Airbnb',
+    intro:
+      'Furnished units in both blocks are let on a nightly and short-term basis, which suits visiting families, UKM guests and contractors working nearby.',
+    points: [
+      'Furnished studio and family layouts available nightly',
+      'Guarded entry with guest registration at the guardhouse',
+      'Shops, food and groceries on Levels 1 and 2 — no car needed',
+      '500 m walk to UKM KTM Komuter station',
+      'Pool, gym and facilities deck included for guests',
+    ],
+    cta: 'View short-stay listings',
+    ctaNote: 'Listing links are published by individual hosts and operators.',
+  },
+  contact: {
+    title: 'Contact',
+    intro: 'For management, maintenance and tenancy enquiries.',
+    phone: 'Phone',
+    email: 'Email',
+    whatsapp: 'WhatsApp',
+    hours: 'Office hours',
+    tbc: 'To be published',
+  },
+  footer: {
+    tagline: 'Service apartment · Jalan Reko, Selangor',
+    rights: (year) => `© ${year} Vista Bangi Service Apartment. All rights reserved.`,
+    sections: 'Sections',
+    disclaimer:
+      'Building details are published in good faith and may be revised. Individual short-stay listings are operated independently of building management.',
+  },
+};

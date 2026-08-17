@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import { localeHref, LOCALES, LOCALE_NAMES } from '../i18n';
+---
+
+<Base locale="en">
+  <section class="shell py-28 text-center">
+    <p class="font-display text-6xl text-brass-500">404</p>
+    <h1 class="section-title mt-4">Page not found</h1>
+    <p class="prose-lead mx-auto mt-4">
+      That page does not exist. Choose a language below to return to the Vista Bangi home page.
+    </p>
+    <ul class="mt-10 flex flex-wrap justify-center gap-3">
+      {
+        LOCALES.map((l) => (
+          <li>
+            <a
+              href={localeHref(l)}
+              hreflang={l}
+              lang={l}
+              class="inline-block rounded-full bg-ink-900 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-ink-800"
+            >
+              {LOCALE_NAMES[l]}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>

@@ -1,0 +1,118 @@
+@import 'tailwindcss';
+
+/* ── Design tokens ────────────────────────────────────────────────────────── */
+@theme {
+  /* Brand: deep teal drawn from the building's glazing, warm brass accent. */
+  --color-ink-50: #f4f7f8;
+  --color-ink-100: #e3ebed;
+  --color-ink-200: #c5d6da;
+  --color-ink-400: #6a8b93;
+  --color-ink-600: #33606c;
+  --color-ink-700: #1f4a55;
+  --color-ink-800: #143440;
+  --color-ink-900: #0b1f28;
+
+  --color-brass-300: #e8c48f;
+  --color-brass-400: #d9a75f;
+  --color-brass-500: #c1873f;
+  --color-brass-600: #9c6a2c;
+
+  --color-sand-50: #fbf9f5;
+  --color-sand-100: #f5f0e7;
+  --color-sand-200: #e9e0d1;
+
+  /* System stacks, chosen so Malay and Tamil both render without a webfont. */
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue',
+    'Noto Sans', 'Noto Sans Tamil', 'Nirmala UI', 'Latha', Arial, sans-serif;
+  --font-display:
+    ui-serif, Georgia, Cambria, 'Times New Roman', 'Noto Serif Tamil', 'Noto Sans Tamil',
+    'Nirmala UI', serif;
+
+  --radius-card: 0.875rem;
+}
+
+/* ── Base ─────────────────────────────────────────────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Offset anchor targets so the sticky header never covers a heading. */
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    background-color: var(--color-sand-50);
+    color: var(--color-ink-900);
+    font-family: var(--font-sans);
+    text-wrap: pretty;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-brass-500);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Tamil sets a little small against Latin at the same size. */
+  :lang(ta) {
+    line-height: 1.75;
+  }
+}
+
+/* ── Component shorthands ─────────────────────────────────────────────────── */
+@layer components {
+  .shell {
+    margin-inline: auto;
+    width: 100%;
+    max-width: 76rem;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .shell {
+      padding-inline: 2rem;
+    }
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 1.2rem + 2vw, 2.75rem);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--color-ink-900);
+  }
+
+  .prose-lead {
+    max-width: 46rem;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--color-ink-700);
+  }
+
+  .card {
+    border-radius: var(--radius-card);
+    border: 1px solid var(--color-ink-100);
+    background-color: #fff;
+    box-shadow: 0 1px 2px rgb(11 31 40 / 0.04);
+  }
+}
