@@ -113,7 +113,14 @@ export const CONTACT = {
 export const SOCIAL = {
   facebook: null as string | null,
   instagram: null as string | null,
-  airbnbSearch: null as string | null, // paste your Airbnb listing/search URL
+  /**
+   * Airbnb search for this building. Trimmed to the stable, shareable form —
+   * the original link also carried `place_id`, `location_bb` and `acp_id`
+   * session parameters, which are tied to one browsing session and add nothing
+   * once the place slug is present.
+   */
+  airbnbSearch:
+    'https://www.airbnb.com/s/Vista-Bangi-Service-Apartment--Kajang--Selangor/homes' as string | null,
 } as const;
 
 export const SITE_URL = 'https://vistabangi.com';

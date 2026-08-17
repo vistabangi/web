@@ -10,7 +10,7 @@ interface Props {
 
 export function Header({ locale, dict, logo }: Props) {
   const links = [
-    { id: 'shops', label: dict.nav.shops },
+    { id: 'outlets', label: dict.nav.outlets },
     { id: 'residences', label: dict.nav.units },
     { id: 'facilities', label: dict.nav.facilities },
     { id: 'security', label: dict.nav.security },
@@ -21,9 +21,11 @@ export function Header({ locale, dict, logo }: Props) {
 
   return (
     <header className="sticky top-0 z-50 bg-ink-900/95 backdrop-blur supports-[backdrop-filter]:bg-ink-900/85">
-      <div className="shell flex h-18 items-center justify-between gap-4">
+      <div className="shell flex h-20 items-center justify-between gap-4">
         <a href={localeHref(locale)} className="flex items-center">
-          <Wordmark logo={logo} alt={dict.hero.logoAlt} height={44} tone="dark" />
+          {/* The crest is portrait-ish (2048×1588) and carries the wordmark, so
+              it needs more height than a typical logotype to stay legible. */}
+          <Wordmark logo={logo} alt={dict.hero.logoAlt} height={58} tone="dark" />
         </a>
 
         <nav aria-label={dict.nav.menu} className="hidden items-center gap-0.5 xl:flex">
@@ -61,7 +63,7 @@ export function Header({ locale, dict, logo }: Props) {
             </svg>
           </label>
 
-          <div className="absolute inset-x-0 top-18 hidden bg-ink-900 peer-checked:block xl:hidden!">
+          <div className="absolute inset-x-0 top-20 hidden bg-ink-900 peer-checked:block xl:hidden!">
             <div className="rule-gold" />
             <nav aria-label={dict.nav.menu} className="shell grid gap-1 py-4">
               {links.map((l) => (

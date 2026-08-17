@@ -5,12 +5,12 @@
  *
  * Only two components are hydrated. Everything else is React rendered to static
  * HTML at build time and ships zero JavaScript:
- *   ShopDirectory     client:visible — needs useState for the category filter
+ *   OutletDirectory   client:visible — needs useState for the category filter
  *   CopyAddressButton client:visible — needs the Clipboard API
  */
 import { Hero } from './Hero';
 import { Highlights } from './Highlights';
-import { ShopDirectory } from './ShopDirectory';
+import { OutletDirectory } from './OutletDirectory';
 import { Residences } from './Residences';
 import { Facilities } from './Facilities';
 import { Security } from './Security';
@@ -19,8 +19,8 @@ import { CopyAddressButton } from './CopyAddressButton';
 import { ShortStay } from './ShortStay';
 import { Contact } from './Contact';
 import { getDict, type Locale } from '../i18n';
-import { resolveBrandAssets } from '../lib/assets';
-import { buildShopDirectoryView } from '../lib/shopView';
+import { resolveBrandAssets, resolveShopLogos } from '../lib/assets';
+import { buildOutletDirectoryView } from '../lib/shopView';
 import { COPYABLE_ADDRESS } from '../lib/maps';
 
 interface Props {
@@ -29,21 +29,20 @@ interface Props {
 
 const { locale } = Astro.props;
 const dict = getDict(locale);
-const { building } = resolveBrandAssets();
+
+// Image detection uses node:fs, so it happens here in Astro rather than inside
+// any React component — plain strings are what get passed down.
+const { background } = resolveBrandAssets();
+const shopLogos = resolveShopLogos();
 
 // Resolved server-side into plain strings, because island props are serialized
 // to JSON and `dict` contains functions. See src/lib/shopView.ts.
-const shopView = buildShopDirectoryView(dict);
+const outletView = buildOutletDirectoryView(dict, shopLogos);
 ---
 
-<Hero dict={dict} photo={building} />
+<Hero dict={dict} photo={background} />
 <Highlights dict={dict} />
-<ShopDirectory
-  client:visible
-  view={shopView}
-  title={dict.floors.title}
-  intro={dict.floors.intro}
-/>
+<OutletDirectory client:visible view={outletView} />
 <Residences dict={dict} />
 <Facilities dict={dict} />
 <Security dict={dict} />

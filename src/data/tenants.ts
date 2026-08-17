@@ -1,149 +1,194 @@
 /**
- * Shop + business directory for the Level 1 and Level 2 commercial podium.
+ * Commercial outlets across the Level 1 and Level 2 podium, presented on the
+ * site as one combined directory.
  *
  * ═══════════════════════════════════════════════════════════════════════════
- *  HOW TO EDIT  (no code changes needed — just edit the array below)
+ *  HOW TO EDIT  (no code changes needed — just edit the array)
  * ═══════════════════════════════════════════════════════════════════════════
- *  `placeholder: true` marks an entry whose details are NOT yet verified. It
- *  renders with a dashed border and a "to be confirmed" badge, so the site never
- *  states a trading name or unit number nobody has checked.
+ *  `floor` is OPTIONAL. Set it only when you know which level the outlet is on;
+ *  entries without it simply omit the level badge instead of guessing.
  *
- *  To promote an entry to verified:
- *    1. Correct `name` to the trading name on the shopfront.
- *    2. Set `unit` to the lot number, and `category` if it is wrong.
- *    3. Add `phone` / `hours` / `url` if known — all optional.
- *    4. DELETE `placeholder: true`.
+ *  `placeholder: true` marks an entry whose details are NOT confirmed. It
+ *  renders with a dashed border and a "to be confirmed" badge. Delete the flag
+ *  once checked.
  *
- *  Unit numbering follows the building's own scheme: Level 1 lots are `1-xx`,
+ *  SHOP LOGOS: drop a square image at `public/images/shops/<id>.png` — the file
+ *  name must match the entry's `id`. It is picked up automatically on the next
+ *  build (see src/lib/assets.ts). Outlets without a logo file render an empty
+ *  circle, so the row stays aligned either way. `.png`, `.jpg`, `.jpeg`, `.svg`
+ *  and `.webp` are all recognised.
+ *
+ *  Unit numbering follows the building's scheme: Level 1 lots are `1-xx`,
  *  Level 2 lots are `2-xx`.
- *
- *  Category labels are translated in src/i18n/{en,ms,ta,zh}.ts under
- *  `floors.categories` — add a category to TenantCategory and all four locales
- *  must supply a label or `astro check` fails the build.
  * ═══════════════════════════════════════════════════════════════════════════
- *
- *  SOURCES for the verified entries below (retrieved August 2026):
- *    Richiamo Coffee  richiamocoffee.com/store/richiamo-coffee-vista-bangi
- *                     → "Unit 1-02, Ground Floor, Vista Bangi, 43000 Kajang"
- *    ZUS Coffee       zuscoffee.com/2024/03/07/zus-coffee-vista-bangi-jalan-reko
- *                     → "1-06 (Ground Floor) Vista Bangi, Jalan Reko"
- *    7-Eleven         listed as "SEL 1-07, Vista Bangi, Jln Reko, 43000 Kajang"
- *    eco-shop         eco-shop.com.my/store-locator
- *                     → "Unit 1-08 & 2-08, 1-09 & 2-09, 1-10 & 2-10,
- *                        1-11 & 2-11 (Ground & 1st Floor)"
- *
- *  Note the naming mismatch: those sources call the podium levels "Ground" and
- *  "1st" floor, while the building's own lot numbers (1-xx, 2-xx) and the
- *  brief for this site call them Level 1 and Level 2. The lot numbers are the
- *  reliable key, so they drive `floor` here.
  */
 
 export type TenantCategory =
   | 'fnb'
   | 'grocery'
   | 'health'
-  | 'beauty'
+  | 'dental'
+  | 'education'
+  | 'tech'
   | 'services'
   | 'retail'
-  | 'education'
+  | 'beauty'
   | 'laundry';
 
 export interface Tenant {
   readonly id: string;
   readonly name: string;
   readonly category: TenantCategory;
-  /** Podium level: 1 or 2. */
-  readonly floor: 1 | 2;
+  /** Podium level, when known. Omit rather than guess. */
+  readonly floor?: 1 | 2;
   /** Lot number or range, e.g. "1-02" or "1-08 – 1-11". Optional. */
   readonly unit?: string;
   /** Intl format, e.g. "+60123456789". Optional. */
   readonly phone?: string;
   /** Free text, e.g. "Daily 8:00–22:00". Optional. */
   readonly hours?: string;
-  /** Outlet or brand page. Optional. */
+  /** The outlet's own site or brand page. Optional. */
   readonly url?: string;
-  /** Present = details unverified. Remove once checked on site. */
+  /** Google listing for the outlet. Optional. */
+  readonly mapUrl?: string;
+  /** Present = details unconfirmed. Remove once checked on site. */
   readonly placeholder?: true;
 }
 
+/**
+ * SOURCES
+ *
+ * Names below were supplied by Vista Bangi management as Google listing links
+ * (recorded in `mapUrl`) — these are first-party confirmations, so they are not
+ * flagged as placeholders even where the lot number is still unknown.
+ *
+ * Lot numbers for ZUS Coffee, 7-Eleven and eco-shop come from those chains' own
+ * published outlet addresses:
+ *   ZUS Coffee  zuscoffee.com  → "1-06 (Ground Floor) Vista Bangi, Jalan Reko"
+ *   7-Eleven    listed as "SEL 1-07, Vista Bangi, Jln Reko, 43000 Kajang"
+ *   eco-shop    eco-shop.com.my/store-locator → "1-08 & 2-08 … 1-11 & 2-11"
+ *
+ * Note: Richiamo Coffee (formerly lot 1-02) has CLOSED — its lot was taken over
+ * by RBS 1 Bistro — so it is deliberately absent rather than listed as shut.
+ */
 export const TENANTS: readonly Tenant[] = [
-  // ── Level 1 · verified ───────────────────────────────────────────────────
+  // ── Food & drink ─────────────────────────────────────────────────────────
   {
-    id: 'richiamo',
-    name: 'Richiamo Coffee',
+    id: 'rbs-1-bistro',
+    name: 'RBS 1 Bistro',
     category: 'fnb',
-    floor: 1,
-    unit: '1-02',
-    url: 'https://www.richiamocoffee.com/store/richiamo-coffee-vista-bangi/',
+    mapUrl: 'https://share.google/iigcWiy65bVXxLYkk',
   },
   {
-    id: 'zus',
+    id: 'restoran-madame',
+    name: 'Restoran Madame',
+    category: 'fnb',
+    mapUrl: 'https://share.google/JzZnrhXNHoNnHT9Ry',
+  },
+  {
+    id: 'zus-coffee',
     name: 'ZUS Coffee',
     category: 'fnb',
     floor: 1,
     unit: '1-06',
     url: 'https://zuscoffee.com/2024/03/07/zus-coffee-vista-bangi-jalan-reko/',
   },
+
+  // ── Clinics ──────────────────────────────────────────────────────────────
+  {
+    id: 'klinik-iman-medic',
+    name: 'Klinik Iman Medic',
+    category: 'health',
+    mapUrl: 'https://share.google/Bh6pIi742UUcgF5h8',
+  },
+  {
+    id: 'klinik-khalifah',
+    name: 'Klinik Khalifah',
+    category: 'health',
+    mapUrl: 'https://share.google/NOS6GJnkkKyn78DVJ',
+  },
+
+  // ── Dental ───────────────────────────────────────────────────────────────
+  {
+    id: 'bangi-dental-cottage',
+    name: 'Bangi Dental Cottage',
+    category: 'dental',
+    mapUrl: 'https://share.google/H91TLl3UHvNBAvuQv',
+  },
+  {
+    id: 'dentacity',
+    name: 'Klinik Pergigian Dentacity',
+    category: 'dental',
+    mapUrl: 'https://share.google/VBg8BOu20snsOYdHr',
+  },
+
+  // ── Early education ──────────────────────────────────────────────────────
+  {
+    id: 'tadika-nimblebee',
+    name: 'Tadika Nimblebee',
+    category: 'education',
+    mapUrl: 'https://share.google/kmoenjNDifWGfty50',
+  },
+  {
+    id: 'al-kauthar-eduqids',
+    name: 'Al Kauthar Eduqids Playschool',
+    category: 'education',
+    mapUrl: 'https://share.google/jCYqmKCeLdCeKbNKF',
+  },
+  {
+    id: 'the-childtime',
+    name: 'The ChildTime Preschool',
+    category: 'education',
+    mapUrl: 'https://share.google/W6wN73ooFvxIHKmu0',
+  },
+
+  // ── Technology ───────────────────────────────────────────────────────────
+  {
+    id: 'izzy-solutions',
+    name: 'IZZY Solutions',
+    category: 'tech',
+    mapUrl: 'https://share.google/QPiY3kLoATYupFAYW',
+  },
+
+  // ── Retail & groceries ───────────────────────────────────────────────────
   { id: 'seven-eleven', name: '7-Eleven', category: 'retail', floor: 1, unit: '1-07' },
   {
-    id: 'eco-shop-l1',
+    id: 'eco-shop',
     name: 'eco-shop',
     category: 'retail',
-    floor: 1,
-    unit: '1-08 – 1-11',
+    unit: '1-08 – 1-11, 2-08 – 2-11',
     url: 'https://www.eco-shop.com.my/store-locator',
   },
-
-  // ── Level 1 · present, lot number not yet confirmed ──────────────────────
-  { id: '99-speedmart', name: '99 Speedmart', category: 'grocery', floor: 1, placeholder: true },
-  { id: 'kk-mart', name: 'KK Mart', category: 'retail', floor: 1, placeholder: true },
-  { id: 'klinik-l1', name: 'Klinik / Medical Centre', category: 'health', floor: 1, placeholder: true },
-  { id: 'restoran-l1', name: 'Restoran / Mamak', category: 'fnb', floor: 1, placeholder: true },
-  { id: 'pharmacy-l1', name: 'Pharmacy', category: 'health', floor: 1, placeholder: true },
-  { id: 'salon-l1', name: 'Salon / Barber', category: 'beauty', floor: 1, placeholder: true },
-
-  // ── Level 2 · verified ───────────────────────────────────────────────────
-  {
-    id: 'eco-shop-l2',
-    name: 'eco-shop',
-    category: 'retail',
-    floor: 2,
-    unit: '2-08 – 2-11',
-    url: 'https://www.eco-shop.com.my/store-locator',
-  },
-
-  // ── Level 2 · to be surveyed ─────────────────────────────────────────────
-  { id: 'klinik-l2', name: 'Klinik / Dental', category: 'health', floor: 2, placeholder: true },
-  { id: 'tuition-l2', name: 'Tuition / Learning Centre', category: 'education', floor: 2, placeholder: true },
-  { id: 'dobi-l2', name: 'Dobi / Laundry', category: 'laundry', floor: 2, placeholder: true },
-  { id: 'spa-l2', name: 'Spa & Wellness', category: 'beauty', floor: 2, placeholder: true },
-  { id: 'office-l2', name: 'Office / Services', category: 'services', floor: 2, placeholder: true },
+  { id: '99-speedmart', name: '99 Speedmart', category: 'grocery', placeholder: true },
+  { id: 'kk-mart', name: 'KK Mart', category: 'retail', placeholder: true },
 ];
 
-/** Tenants on a given podium level: verified first, then alphabetical. */
-export function tenantsByFloor(floor: 1 | 2): readonly Tenant[] {
-  return TENANTS.filter((t) => t.floor === floor).sort((a, b) => {
+/** Verified entries first, then alphabetical within each group. */
+export function sortedTenants(): readonly Tenant[] {
+  return [...TENANTS].sort((a, b) => {
     if (Boolean(a.placeholder) !== Boolean(b.placeholder)) return a.placeholder ? 1 : -1;
     return a.name.localeCompare(b.name);
   });
 }
 
-/** Distinct categories actually present, in TenantCategory declaration order. */
+/** Declaration order, used to keep the filter chips stable. */
 const CATEGORY_ORDER: readonly TenantCategory[] = [
   'fnb',
   'grocery',
   'health',
-  'beauty',
+  'dental',
+  'education',
+  'tech',
   'services',
   'retail',
-  'education',
+  'beauty',
   'laundry',
 ];
 
+/** Only the categories actually present get a filter chip. */
 export function activeCategories(): readonly TenantCategory[] {
   const present = new Set(TENANTS.map((t) => t.category));
   return CATEGORY_ORDER.filter((c) => present.has(c));
 }
 
-/** True while any entry is still unverified — drives the "being compiled" notice. */
-export const HAS_PLACEHOLDER_TENANTS = TENANTS.some((t) => t.placeholder);
+export const VERIFIED_TENANT_COUNT = TENANTS.filter((t) => !t.placeholder).length;

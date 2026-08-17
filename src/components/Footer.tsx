@@ -12,7 +12,7 @@ interface Props {
 
 export function Footer({ locale, dict, logo, year }: Props) {
   const links = [
-    { id: 'shops', label: dict.nav.shops },
+    { id: 'outlets', label: dict.nav.outlets },
     { id: 'residences', label: dict.nav.units },
     { id: 'facilities', label: dict.nav.facilities },
     { id: 'security', label: dict.nav.security },

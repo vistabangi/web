@@ -1,7 +1,8 @@
 import type { TenantCategory } from '../data/tenants';
 import type { FacilityKey } from '../data/facilities';
 
-export const LOCALES = ['en', 'ms', 'ta', 'zh'] as const;
+/** Display order of the language switcher: EN, BM, 中文, தமிழ். */
+export const LOCALES = ['en', 'ms', 'zh', 'ta'] as const;
 export type Locale = (typeof LOCALES)[number];
 
 export const DEFAULT_LOCALE: Locale = 'en';
@@ -10,29 +11,29 @@ export const DEFAULT_LOCALE: Locale = 'en';
 export const HTML_LANG: Record<Locale, string> = {
   en: 'en-MY',
   ms: 'ms-MY',
-  ta: 'ta-MY',
   zh: 'zh-Hans-MY',
+  ta: 'ta-MY',
 };
 
 /** Names shown in the language switcher, each in its own language. */
 export const LOCALE_NAMES: Record<Locale, string> = {
   en: 'English',
   ms: 'Bahasa Melayu',
-  ta: 'தமிழ்',
   zh: '简体中文',
+  ta: 'தமிழ்',
 };
 
 /** Short codes for the compact switcher. */
 export const LOCALE_SHORT: Record<Locale, string> = {
   en: 'EN',
   ms: 'BM',
-  ta: 'TA',
   zh: '中文',
+  ta: 'தமிழ்',
 };
 
 /**
  * Every locale must supply this exact shape. Adding a field here is a
- * compile-time obligation across en.ts, ms.ts and ta.ts.
+ * compile-time obligation across en.ts, ms.ts, zh.ts and ta.ts.
  */
 export interface Dict {
   readonly meta: {
@@ -42,7 +43,7 @@ export interface Dict {
   };
   readonly nav: {
     readonly home: string;
-    readonly shops: string;
+    readonly outlets: string;
     readonly units: string;
     readonly facilities: string;
     readonly security: string;
@@ -72,17 +73,20 @@ export interface Dict {
     readonly intro: string;
     readonly items: readonly { readonly title: string; readonly body: string }[];
   };
-  readonly floors: {
+  /** The Level 1 + Level 2 commercial outlets, presented as one directory. */
+  readonly outlets: {
     readonly title: string;
     readonly intro: string;
-    readonly level: (n: number) => string;
-    readonly levelLead: Record<1 | 2, string>;
+    readonly levelsCaption: string;
     readonly filterAll: string;
     readonly filterLabel: string;
     readonly unitLabel: string;
+    readonly levelLabel: (n: number) => string;
     readonly hoursLabel: string;
     readonly callLabel: string;
     readonly websiteLabel: string;
+    readonly mapLabel: string;
+    readonly logoAlt: (name: string) => string;
     readonly verifiedCount: (verified: number, total: number) => string;
     readonly toBeConfirmed: string;
     readonly placeholderNotice: string;

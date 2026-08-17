@@ -77,7 +77,7 @@ export function Hero({ dict, photo }: Props) {
             {dict.hero.ctaPrimary}
           </a>
           <a
-            href="#shops"
+            href="#outlets"
             className="rounded-full border border-gold-400/50 px-7 py-3.5 text-sm font-semibold text-gold-200 transition-colors hover:border-gold-300 hover:text-gold-100"
           >
             {dict.hero.ctaSecondary}

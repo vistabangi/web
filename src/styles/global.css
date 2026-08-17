@@ -52,8 +52,8 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    /* Keep the sticky header from covering an anchored heading. */
-    scroll-padding-top: 5.5rem;
+    /* Keep the sticky 5rem header from covering an anchored heading. */
+    scroll-padding-top: 6rem;
     -webkit-text-size-adjust: 100%;
   }
 
