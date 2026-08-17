@@ -91,11 +91,14 @@ export const SECURITY = {
   visitorRegistration: true,
 } as const;
 
+// Ordered nearest first — the Nearby list renders them in this order.
 export const TRANSPORT = [
   // Distances from public listings — CONFIRM before publishing.
   { name: 'UKM KTM Komuter Station', distanceKm: 0.5 },
   { name: 'Universiti Kebangsaan Malaysia (UKM)', distanceKm: 3 },
   { name: 'Kajang town centre', distanceKm: 6 },
+  // Reachable on the T464 MRT feeder bus — about 11 minutes.
+  { name: 'MRT Kajang Station', distanceKm: 11 },
   { name: 'IOI City Mall, Putrajaya', distanceKm: 15 },
 ] as const;
 

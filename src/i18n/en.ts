@@ -167,7 +167,7 @@ export const en: Dict = {
       'Guarded entry with guest registration at the guardhouse',
       'Cafés, clinics and groceries on Levels 1 and 2 — no car needed',
       '500 m walk to UKM KTM Komuter station',
-      'MRT Kajang station 11 minutes away — the T464 MRT feeder bus runs the full loop, connecting Vista Bangi directly to the MRT Kajang area and back',
+      'MRT Kajang station 11 minutes away with the T464 MRT feeder bus',
       'Pool, gym and facilities deck included for guests',
     ],
     cta: 'View short-stay listings',

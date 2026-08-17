@@ -167,7 +167,7 @@ export const ms: Dict = {
       'Pintu masuk berkawal dengan pendaftaran tetamu di pondok pengawal',
       'Kafe, klinik dan barang dapur di Tingkat 1 dan 2 — tanpa perlu kereta',
       'Berjalan 500 m ke stesen KTM Komuter UKM',
-      'Stesen MRT Kajang 11 minit sahaja — bas perantara MRT T464 beroperasi sepanjang laluan, menghubungkan Vista Bangi terus ke kawasan MRT Kajang dan sebaliknya',
+      'Stesen MRT Kajang 11 minit dengan bas perantara MRT T464',
       'Kolam, gim dan dek kemudahan disediakan untuk tetamu',
     ],
     cta: 'Lihat senarai sewa pendek',
