@@ -1,18 +1,27 @@
 ---
 /**
- * The full home page body, shared by every locale route so the three pages in
+ * The full home page body, shared by every locale route so the pages in
  * src/pages/ stay one line each and cannot drift apart structurally.
+ *
+ * Only two components are hydrated. Everything else is React rendered to static
+ * HTML at build time and ships zero JavaScript:
+ *   ShopDirectory     client:visible — needs useState for the category filter
+ *   CopyAddressButton client:visible — needs the Clipboard API
  */
-import Hero from './Hero.astro';
-import Highlights from './Highlights.astro';
-import Floors from './Floors.astro';
-import Residences from './Residences.astro';
-import Facilities from './Facilities.astro';
-import Security from './Security.astro';
-import Location from './Location.astro';
-import ShortStay from './ShortStay.astro';
-import Contact from './Contact.astro';
+import { Hero } from './Hero';
+import { Highlights } from './Highlights';
+import { ShopDirectory } from './ShopDirectory';
+import { Residences } from './Residences';
+import { Facilities } from './Facilities';
+import { Security } from './Security';
+import { Location } from './Location';
+import { CopyAddressButton } from './CopyAddressButton';
+import { ShortStay } from './ShortStay';
+import { Contact } from './Contact';
 import { getDict, type Locale } from '../i18n';
+import { resolveBrandAssets } from '../lib/assets';
+import { buildShopDirectoryView } from '../lib/shopView';
+import { COPYABLE_ADDRESS } from '../lib/maps';
 
 interface Props {
   locale: Locale;
@@ -20,14 +29,32 @@ interface Props {
 
 const { locale } = Astro.props;
 const dict = getDict(locale);
+const { building } = resolveBrandAssets();
+
+// Resolved server-side into plain strings, because island props are serialized
+// to JSON and `dict` contains functions. See src/lib/shopView.ts.
+const shopView = buildShopDirectoryView(dict);
 ---
 
-<Hero dict={dict} />
+<Hero dict={dict} photo={building} />
 <Highlights dict={dict} />
-<Floors dict={dict} />
+<ShopDirectory
+  client:visible
+  view={shopView}
+  title={dict.floors.title}
+  intro={dict.floors.intro}
+/>
 <Residences dict={dict} />
 <Facilities dict={dict} />
 <Security dict={dict} />
-<Location dict={dict} />
+<Location dict={dict}>
+  <CopyAddressButton
+    slot="copyButton"
+    client:visible
+    address={COPYABLE_ADDRESS}
+    label={dict.location.copyAddress}
+    copiedLabel={dict.location.copied}
+  />
+</Location>
 <ShortStay dict={dict} />
 <Contact dict={dict} />

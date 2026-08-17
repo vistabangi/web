@@ -32,6 +32,8 @@ export const en: Dict = {
     statBlocks: 'Residential blocks',
     statRetail: 'Retail levels',
     statTenure: 'Tenure',
+    logoAlt: 'Vista Bangi crest',
+    photoAlt: 'The two Vista Bangi towers above the shop podium on Jalan Reko',
   },
   highlights: {
     title: 'Why Vista Bangi',
@@ -69,9 +71,11 @@ export const en: Dict = {
     unitLabel: 'Lot',
     hoursLabel: 'Hours',
     callLabel: 'Call',
-    toBeConfirmed: 'Name to be confirmed',
+    websiteLabel: 'Website',
+    verifiedCount: (verified, total) => `${verified} of ${total} entries confirmed`,
+    toBeConfirmed: 'To be confirmed',
     placeholderNotice:
-      'This directory is being compiled. Entries below show the type of business at each lot; trading names are being confirmed with the management office.',
+      'This directory is still being compiled. Entries marked "to be confirmed" are businesses known to trade here whose lot number or exact trading name we are still checking with the management office.',
     emptyFiltered: 'No businesses in this category on this level.',
     categories: {
       fnb: 'Food & drink',

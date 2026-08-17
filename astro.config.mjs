@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
@@ -9,10 +10,11 @@ export default defineConfig({
   site: 'https://vistabangi.com',
   trailingSlash: 'ignore',
   integrations: [
+    react(),
     sitemap({
       i18n: {
         defaultLocale: 'en',
-        locales: { en: 'en-MY', ms: 'ms-MY', ta: 'ta-MY' },
+        locales: { en: 'en-MY', ms: 'ms-MY', ta: 'ta-MY', zh: 'zh-Hans-MY' },
       },
     }),
   ],

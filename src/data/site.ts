@@ -1,9 +1,9 @@
 /**
  * Single source of truth for Vista Bangi building + contact facts.
  *
- * ⚠️ Fields marked `CONFIRM` below are drawn from public property listings, not
- * from management records. Verify each one against the strata/management office
- * before this site goes to production — see README.md § "Facts to confirm".
+ * ⚠️ Fields marked `CONFIRM` are drawn from public property listings, not from
+ * management records. Verify each against the strata/management office before
+ * launch — see README.md § "Facts to confirm".
  */
 
 export interface GeoPoint {
@@ -13,7 +13,6 @@ export interface GeoPoint {
 
 export interface Block {
   readonly id: string;
-  /** Human label, e.g. "Block A". Localised labels live in src/i18n. */
   readonly name: string;
   readonly floors: number;
   /** Total residential units, or null when not yet confirmed. */
@@ -27,7 +26,7 @@ export const BUILDING = {
   floors: 38,
   blocks: [
     // CONFIRM: public listings quote 526 (A) and 492 (B) units across 39 storeys.
-    // Management advised 38 storeys, so unit counts are left null until verified.
+    // Management advised 38 storeys, so unit counts stay null until verified.
     { id: 'a', name: 'Block A', floors: 38, units: null },
     { id: 'b', name: 'Block B', floors: 38, units: null },
   ] satisfies readonly Block[],
@@ -37,13 +36,18 @@ export const BUILDING = {
   shortStayFriendly: true,
 } as const;
 
+/**
+ * Address. Corroborated across several independent listings (EdgeProp, Ziba
+ * Property, and the registered addresses of the Richiamo Coffee, ZUS Coffee and
+ * 7-Eleven outlets in the podium), all of which give 43000 Kajang.
+ */
 export const ADDRESS = {
+  streetNumber: '18',
   street: 'Jalan Reko',
-  // CONFIRM: listings variously cite "Taman Sri Reko" and "Seksyen 2, Bandar Baru Bangi".
-  locality: 'Bandar Baru Bangi',
+  locality: 'Taman Sri Reko',
   city: 'Kajang',
   state: 'Selangor',
-  postcode: '43650', // CONFIRM: 43650 (Bandar Baru Bangi) vs 43000 (Kajang).
+  postcode: '43000',
   country: 'Malaysia',
   countryCode: 'MY',
 } as const;
@@ -51,7 +55,7 @@ export const ADDRESS = {
 /** Formatted single-line address used in copy, JSON-LD and map links. */
 export const ADDRESS_LINE = [
   BUILDING.name,
-  ADDRESS.street,
+  `${ADDRESS.streetNumber}, ${ADDRESS.street}`,
   ADDRESS.locality,
   `${ADDRESS.postcode} ${ADDRESS.city}`,
   ADDRESS.state,
@@ -62,10 +66,10 @@ export const ADDRESS_LINE = [
  * Exact pin coordinates.
  *
  * Deliberately `null` until surveyed: an inaccurate pin is worse than none, so
- * while this is null the map falls back to a Google Maps *place search* embed,
- * which resolves the building by name. Fill this in (right-click the building
- * in Google Maps → click the lat/lng to copy) and every map link, the embed and
- * the JSON-LD `geo` block upgrade to an exact pin automatically.
+ * while this is null the map falls back to a Google Maps *place search*, which
+ * resolves the building by name. Fill this in (right-click the building in
+ * Google Maps → click the lat/lng to copy) and the embed, every map link and the
+ * JSON-LD `geo` block all upgrade to an exact pin automatically.
  */
 export const COORDINATES: GeoPoint | null = null;
 
@@ -77,7 +81,7 @@ export const SECURITY = {
   cctv: true,
   /** CONFIRM: whether access is card/fob controlled at lobby + lift. */
   accessCardEntry: true,
-  /** CONFIRM: whether the scheme is gated with a single controlled entry point. */
+  /** CONFIRM: whether the scheme has a single controlled entry point. */
   gatedEntry: true,
   visitorRegistration: true,
 } as const;
@@ -96,8 +100,8 @@ export const HIGHWAYS = ['SILK', 'LEKAS', 'MEX', 'PLUS', 'KLIA Expressway'] as c
  * Contact details.
  *
  * ⚠️ ALL PLACEHOLDERS. Replace with the real management office / short-stay
- * contacts before launch. `null` entries are omitted from the rendered page and
- * from JSON-LD rather than shown as empty, so it is safe to leave them unset.
+ * contacts. `null` entries are omitted from the page and from JSON-LD rather
+ * than shown as empty, so it is safe to leave them unset.
  */
 export const CONTACT = {
   managementPhone: null as string | null, // e.g. '+60312345678'

@@ -1,42 +1,58 @@
 @import 'tailwindcss';
 
+/* Self-hosted fonts — no CDN request, no third-party tracking.
+   Cormorant Garamond for display, Inter for text, Noto Sans Tamil for /ta/.
+   Chinese uses the system CJK stack (see --font-cjk); a Simplified Chinese
+   webfont would add several megabytes for a handful of headings. */
+@import '@fontsource-variable/cormorant-garamond';
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/noto-sans-tamil';
+
 /* ── Design tokens ────────────────────────────────────────────────────────── */
 @theme {
-  /* Brand: deep teal drawn from the building's glazing, warm brass accent. */
-  --color-ink-50: #f4f7f8;
-  --color-ink-100: #e3ebed;
-  --color-ink-200: #c5d6da;
-  --color-ink-400: #6a8b93;
-  --color-ink-600: #33606c;
-  --color-ink-700: #1f4a55;
-  --color-ink-800: #143440;
-  --color-ink-900: #0b1f28;
+  /* Gold, sampled across the gradient in the Vista Bangi crest: pale highlight
+     through to the deep shadow tone. 500 is the mid value used for rules and
+     small marks; 600/700 are the only shades that clear 4.5:1 on white. */
+  --color-gold-50: #fdfaf2;
+  --color-gold-100: #f9f1dc;
+  --color-gold-200: #f1e2b6;
+  --color-gold-300: #e6cd85;
+  --color-gold-400: #d9b65c;
+  --color-gold-500: #c69a34;
+  --color-gold-600: #a67c22;
+  --color-gold-700: #7d5c19;
+  --color-gold-800: #5a4212;
 
-  --color-brass-300: #e8c48f;
-  --color-brass-400: #d9a75f;
-  --color-brass-500: #c1873f;
-  --color-brass-600: #9c6a2c;
+  /* Warm neutrals — a cool grey would fight the gold. */
+  --color-ink-50: #faf9f7;
+  --color-ink-100: #f0ede7;
+  --color-ink-200: #ddd8ce;
+  --color-ink-300: #c2bab0;
+  --color-ink-400: #8c8478;
+  --color-ink-500: #6b6459;
+  --color-ink-600: #524c43;
+  --color-ink-700: #3a352e;
+  --color-ink-800: #26221d;
+  --color-ink-900: #171410;
 
-  --color-sand-50: #fbf9f5;
-  --color-sand-100: #f5f0e7;
-  --color-sand-200: #e9e0d1;
-
-  /* System stacks, chosen so Malay and Tamil both render without a webfont. */
+  --font-display: 'Cormorant Garamond Variable', ui-serif, Georgia, 'Times New Roman', serif;
   --font-sans:
-    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue',
-    'Noto Sans', 'Noto Sans Tamil', 'Nirmala UI', 'Latha', Arial, sans-serif;
-  --font-display:
-    ui-serif, Georgia, Cambria, 'Times New Roman', 'Noto Serif Tamil', 'Noto Sans Tamil',
-    'Nirmala UI', serif;
+    'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  --font-tamil: 'Noto Sans Tamil Variable', 'Nirmala UI', 'Latha', sans-serif;
+  --font-cjk:
+    'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', 'Noto Sans CJK SC',
+    'Source Han Sans SC', sans-serif;
 
-  --radius-card: 0.875rem;
+  --radius-card: 0.75rem;
+  --shadow-lift: 0 1px 2px rgb(23 20 16 / 0.04), 0 8px 24px -12px rgb(23 20 16 / 0.12);
 }
 
 /* ── Base ─────────────────────────────────────────────────────────────────── */
 @layer base {
   html {
     scroll-behavior: smooth;
-    /* Offset anchor targets so the sticky header never covers a heading. */
+    /* Keep the sticky header from covering an anchored heading. */
     scroll-padding-top: 5.5rem;
     -webkit-text-size-adjust: 100%;
   }
@@ -54,9 +70,10 @@
   }
 
   body {
-    background-color: var(--color-sand-50);
-    color: var(--color-ink-900);
+    background-color: #fff;
+    color: var(--color-ink-800);
     font-family: var(--font-sans);
+    font-optical-sizing: auto;
     text-wrap: pretty;
     -webkit-font-smoothing: antialiased;
   }
@@ -68,14 +85,32 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-brass-500);
+    outline: 2px solid var(--color-gold-600);
     outline-offset: 3px;
     border-radius: 2px;
   }
 
-  /* Tamil sets a little small against Latin at the same size. */
+  /* Per-script font stacks. Tamil and CJK glyphs are absent from Cormorant and
+     Inter, so headings in those locales fall back to a matching family rather
+     than to whatever the browser picks. */
   :lang(ta) {
-    line-height: 1.75;
+    font-family: var(--font-tamil);
+    line-height: 1.8;
+  }
+  :lang(ta) :is(h1, h2, h3, .font-display) {
+    font-family: var(--font-tamil);
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+
+  :lang(zh) {
+    font-family: var(--font-cjk);
+    line-height: 1.85;
+  }
+  :lang(zh) :is(h1, h2, h3, .font-display) {
+    font-family: var(--font-cjk);
+    font-weight: 600;
+    letter-spacing: 0.02em;
   }
 }
 
@@ -84,7 +119,7 @@
   .shell {
     margin-inline: auto;
     width: 100%;
-    max-width: 76rem;
+    max-width: 78rem;
     padding-inline: 1.25rem;
   }
 
@@ -94,25 +129,70 @@
     }
   }
 
+  /* Display type: Cormorant needs a heavier weight and tighter tracking than
+     its defaults to hold up at heading sizes. */
+  .display {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.08;
+  }
+
   .section-title {
     font-family: var(--font-display);
-    font-size: clamp(1.75rem, 1.2rem + 2vw, 2.75rem);
-    line-height: 1.15;
-    letter-spacing: -0.015em;
+    font-weight: 600;
+    font-size: clamp(1.875rem, 1.2rem + 2.4vw, 3rem);
+    line-height: 1.12;
+    letter-spacing: -0.012em;
     color: var(--color-ink-900);
+  }
+
+  /* Small caps label used above section titles. */
+  .eyebrow {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-gold-700);
   }
 
   .prose-lead {
     max-width: 46rem;
     font-size: 1.0625rem;
-    line-height: 1.7;
-    color: var(--color-ink-700);
+    line-height: 1.75;
+    color: var(--color-ink-600);
   }
 
   .card {
     border-radius: var(--radius-card);
     border: 1px solid var(--color-ink-100);
     background-color: #fff;
-    box-shadow: 0 1px 2px rgb(11 31 40 / 0.04);
+  }
+
+  /* Thin gold hairline used to separate major bands. */
+  .rule-gold {
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--color-gold-300) 15%,
+      var(--color-gold-400) 50%,
+      var(--color-gold-300) 85%,
+      transparent
+    );
+  }
+
+  /* Gold gradient for the wordmark, matching the crest's light-to-dark sweep. */
+  .text-gold-gradient {
+    background: linear-gradient(
+      100deg,
+      var(--color-gold-300),
+      var(--color-gold-500) 45%,
+      var(--color-gold-200) 70%,
+      var(--color-gold-600)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 }

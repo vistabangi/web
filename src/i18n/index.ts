@@ -1,12 +1,13 @@
 import { en } from './en';
 import { ms } from './ms';
 import { ta } from './ta';
+import { zh } from './zh';
 import { DEFAULT_LOCALE, LOCALES, type Dict, type Locale } from './types';
 
 export { LOCALES, DEFAULT_LOCALE, HTML_LANG, LOCALE_NAMES, LOCALE_SHORT } from './types';
 export type { Locale, Dict } from './types';
 
-const DICTS: Record<Locale, Dict> = { en, ms, ta };
+const DICTS: Record<Locale, Dict> = { en, ms, ta, zh };
 
 export function getDict(locale: Locale): Dict {
   return DICTS[locale];

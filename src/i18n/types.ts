@@ -1,7 +1,7 @@
 import type { TenantCategory } from '../data/tenants';
 import type { FacilityKey } from '../data/facilities';
 
-export const LOCALES = ['en', 'ms', 'ta'] as const;
+export const LOCALES = ['en', 'ms', 'ta', 'zh'] as const;
 export type Locale = (typeof LOCALES)[number];
 
 export const DEFAULT_LOCALE: Locale = 'en';
@@ -11,6 +11,7 @@ export const HTML_LANG: Record<Locale, string> = {
   en: 'en-MY',
   ms: 'ms-MY',
   ta: 'ta-MY',
+  zh: 'zh-Hans-MY',
 };
 
 /** Names shown in the language switcher, each in its own language. */
@@ -18,6 +19,7 @@ export const LOCALE_NAMES: Record<Locale, string> = {
   en: 'English',
   ms: 'Bahasa Melayu',
   ta: 'தமிழ்',
+  zh: '简体中文',
 };
 
 /** Short codes for the compact switcher. */
@@ -25,6 +27,7 @@ export const LOCALE_SHORT: Record<Locale, string> = {
   en: 'EN',
   ms: 'BM',
   ta: 'TA',
+  zh: '中文',
 };
 
 /**
@@ -61,6 +64,8 @@ export interface Dict {
     readonly statBlocks: string;
     readonly statRetail: string;
     readonly statTenure: string;
+    readonly logoAlt: string;
+    readonly photoAlt: string;
   };
   readonly highlights: {
     readonly title: string;
@@ -77,6 +82,8 @@ export interface Dict {
     readonly unitLabel: string;
     readonly hoursLabel: string;
     readonly callLabel: string;
+    readonly websiteLabel: string;
+    readonly verifiedCount: (verified: number, total: number) => string;
     readonly toBeConfirmed: string;
     readonly placeholderNotice: string;
     readonly emptyFiltered: string;

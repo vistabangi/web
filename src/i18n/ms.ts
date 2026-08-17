@@ -32,6 +32,8 @@ export const ms: Dict = {
     statBlocks: 'Blok kediaman',
     statRetail: 'Tingkat kedai',
     statTenure: 'Pegangan',
+    logoAlt: 'Jata Vista Bangi',
+    photoAlt: 'Dua menara Vista Bangi di atas podium kedai di Jalan Reko',
   },
   highlights: {
     title: 'Mengapa Vista Bangi',
@@ -69,9 +71,11 @@ export const ms: Dict = {
     unitLabel: 'Lot',
     hoursLabel: 'Waktu',
     callLabel: 'Hubungi',
-    toBeConfirmed: 'Nama akan dikemas kini',
+    websiteLabel: 'Laman web',
+    verifiedCount: (verified, total) => `${verified} daripada ${total} entri telah disemak`,
+    toBeConfirmed: 'Belum disemak',
     placeholderNotice:
-      'Direktori ini sedang dikumpulkan. Entri di bawah menunjukkan jenis perniagaan di setiap lot; nama perniagaan sedang disemak bersama pejabat pengurusan.',
+      'Direktori ini masih dikumpulkan. Entri bertanda "belum disemak" ialah perniagaan yang memang beroperasi di sini, tetapi nombor lot atau nama tepatnya masih disemak bersama pejabat pengurusan.',
     emptyFiltered: 'Tiada perniagaan dalam kategori ini di tingkat ini.',
     categories: {
       fnb: 'Makanan & minuman',
