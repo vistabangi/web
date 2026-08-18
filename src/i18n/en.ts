@@ -71,10 +71,9 @@ export const en: Dict = {
     websiteLabel: 'Website',
     mapLabel: 'Google listing',
     logoAlt: (name) => `${name} logo`,
-    verifiedCount: (verified, total) => `${verified} of ${total} outlets confirmed`,
-    toBeConfirmed: 'To be confirmed',
+    verifiedCount: (withLot, total) => `${withLot} of ${total} lot numbers confirmed`,
     placeholderNotice:
-      'Lot numbers are still being compiled. Entries marked "to be confirmed" are businesses known to trade here whose lot number or exact trading name we are still checking with the management office.',
+      'Every outlet listed here trades at Vista Bangi. Lot numbers are still being compiled, so some entries show no level or lot yet rather than a guess.',
     emptyFiltered: 'No outlets in this category.',
     categories: {
       fnb: 'Food & drink',

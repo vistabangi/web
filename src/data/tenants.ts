@@ -5,23 +5,23 @@
  * ═══════════════════════════════════════════════════════════════════════════
  *  HOW TO EDIT  (no code changes needed — just edit the array)
  * ═══════════════════════════════════════════════════════════════════════════
- *  `floor` is OPTIONAL. Set it only when you know which level the outlet is on;
- *  entries without it simply omit the level badge instead of guessing.
+ *  LOT NUMBERS drive everything. The building numbers its lots `<level>-<lot>`,
+ *  so the first digit IS the floor: `1-07` is Level 1, `2-07` is Level 2. The
+ *  level shown on each card is derived from `unit` by `levelsOf()` below — there
+ *  is deliberately no separate `floor` field to fall out of sync with it.
  *
- *  `placeholder: true` marks an entry whose details are NOT confirmed. It
- *  renders with a dashed border and a "to be confirmed" badge. Delete the flag
- *  once checked.
+ *  An outlet spanning both levels lists every range it occupies, comma
+ *  separated, e.g. `'1-08 – 1-11, 2-08 – 2-11'`. It is then shown as Levels 1 & 2.
  *
- *  SHOP LOGOS: drop a square image in `public/images/shops/`. By default the file
- *  name must match the entry's `id` (e.g. `dentacity.png`); when it does not,
- *  set `logoFile` to the base name instead (e.g. `logoFile: 'zus'` for
- *  `zus.png`). Either way it is picked up on the next build — see
- *  src/lib/assets.ts. Outlets without a logo file render an empty circle, so the
- *  row stays aligned either way. `.png`, `.jpg`, `.jpeg`, `.svg` and `.webp` are
- *  all recognised.
+ *  Leave `unit` off when the lot is genuinely unknown: the card omits the level
+ *  and lot line rather than guessing, and the outlet counts against the
+ *  "N of M lot numbers confirmed" figure until it is filled in.
  *
- *  Unit numbering follows the building's scheme: Level 1 lots are `1-xx`,
- *  Level 2 lots are `2-xx`.
+ *  LINKS: `url` is the outlet's own website, `mapUrl` its Google listing. Both
+ *  render beneath the name, so supply both where they exist.
+ *
+ *  LOGOS: drop a square image in `public/images/shops/`. The file name must
+ *  match `id`, or set `logoFile` to the base name when it differs.
  * ═══════════════════════════════════════════════════════════════════════════
  */
 
@@ -41,42 +41,40 @@ export interface Tenant {
   readonly id: string;
   readonly name: string;
   readonly category: TenantCategory;
-  /** Podium level, when known. Omit rather than guess. */
-  readonly floor?: 1 | 2;
-  /** Lot number or range, e.g. "1-02" or "1-08 – 1-11". Optional. */
-  readonly unit?: string;
-  /** Intl format, e.g. "+60123456789". Optional. */
-  readonly phone?: string;
-  /** Free text, e.g. "Daily 8:00–22:00". Optional. */
-  readonly hours?: string;
-  /** The outlet's own site or brand page. Optional. */
-  readonly url?: string;
-  /** Google listing for the outlet. Optional. */
-  readonly mapUrl?: string;
   /**
-   * Base name of the logo file in `public/images/shops/`, without extension.
-   * Only needed when it differs from `id`.
+   * Lot number, range, or comma-separated ranges — e.g. `'1-07'`, `'1-03A'`,
+   * `'1-08 – 1-11, 2-08 – 2-11'`. The leading digit of each part is the level.
+   * Omit when unknown.
    */
+  readonly unit?: string;
+  readonly phone?: string;
+  readonly hours?: string;
+  /** The outlet's own website. */
+  readonly url?: string;
+  /** The outlet's Google listing. */
+  readonly mapUrl?: string;
+  /** Logo file base name in public/images/shops/, if it differs from `id`. */
   readonly logoFile?: string;
-  /** Present = details unconfirmed. Remove once checked on site. */
-  readonly placeholder?: true;
 }
 
 /**
- * SOURCES
+ * SOURCES for the lot numbers below (retrieved August 2026). Names throughout
+ * were confirmed by Vista Bangi management via the Google listings in `mapUrl`.
  *
- * Names below were supplied by Vista Bangi management as Google listing links
- * (recorded in `mapUrl`) — these are first-party confirmations, so they are not
- * flagged as placeholders even where the lot number is still unknown.
+ *   ZUS Coffee            zuscoffee.com outlet page      → "1-06 (Ground Floor)"
+ *   CAFÉ by 7-Eleven      outlet listing                 → "SEL 1-07"
+ *   eco-shop              eco-shop.com.my store locator  → "1-08 & 2-08 … 1-11 & 2-11"
+ *   Klinik Iman Medic     medical.my directory           → "1-03A"
+ *   Klinik Khalifah       asiafirms / medical.my         → "1-05"
+ *   Dentacity             dentacity.my contact page      → "2-07"
+ *   Bangi Dental Cottage  hokucare / compumed listings   → "1-13a (ground floor)"
  *
- * Lot numbers for ZUS Coffee, 7-Eleven and eco-shop come from those chains' own
- * published outlet addresses:
- *   ZUS Coffee  zuscoffee.com  → "1-06 (Ground Floor) Vista Bangi, Jalan Reko"
- *   7-Eleven    listed as "SEL 1-07, Vista Bangi, Jln Reko, 43000 Kajang"
- *   eco-shop    eco-shop.com.my/store-locator → "1-08 & 2-08 … 1-11 & 2-11"
+ * ⚠️ RBS 1 Bistro's lot is DERIVED, not sourced: Richiamo Coffee published its
+ * address as lot 1-02, and management advised RBS took that lot over. Sound,
+ * but worth confirming on site.
  *
- * Note: Richiamo Coffee (formerly lot 1-02) has CLOSED — its lot was taken over
- * by RBS 1 Bistro — so it is deliberately absent rather than listed as shut.
+ * ⚠️ Seven outlets still have no lot number — see README § "The outlet
+ * directory". They render without a level or lot rather than with a guess.
  */
 export const TENANTS: readonly Tenant[] = [
   // ── Food & drink ─────────────────────────────────────────────────────────
@@ -84,7 +82,9 @@ export const TENANTS: readonly Tenant[] = [
     id: 'rbs-1-bistro',
     name: 'RBS 1 Bistro',
     category: 'fnb',
+    unit: '1-02', // Derived from Richiamo Coffee's former lot — confirm on site.
     logoFile: 'rbs',
+    url: 'https://www.instagram.com/popular/rbs-1-bistro-vista-bangi/',
     mapUrl: 'https://share.google/iigcWiy65bVXxLYkk',
   },
   {
@@ -92,26 +92,25 @@ export const TENANTS: readonly Tenant[] = [
     name: 'Restoran Madame',
     category: 'fnb',
     logoFile: 'madame',
+    url: 'https://www.instagram.com/madamekafe_official',
     mapUrl: 'https://share.google/JzZnrhXNHoNnHT9Ry',
   },
   {
     id: 'zus-coffee',
     name: 'ZUS Coffee',
     category: 'fnb',
-    floor: 1,
     unit: '1-06',
     logoFile: 'zus',
-    url: 'https://zuscoffee.com/2024/03/07/zus-coffee-vista-bangi-jalan-reko/',
+    url: 'https://zuscoffee.com/',
+    mapUrl: 'https://share.google/VQTOxIEbU3Yg8g7Rw',
   },
   {
-    // Google lists this outlet as "CAFÉ by 7-Eleven Vista Bangi (#2939)" — the
-    // café-format store rather than a plain convenience branch.
     id: 'seven-eleven',
     name: 'CAFÉ by 7-Eleven',
     category: 'fnb',
-    floor: 1,
     unit: '1-07',
     logoFile: '7-eleven',
+    url: 'https://www.7eleven.com.my/store-locator/',
     mapUrl: 'https://share.google/OVvomaMjE4blVg2XK',
   },
 
@@ -120,13 +119,17 @@ export const TENANTS: readonly Tenant[] = [
     id: 'klinik-iman-medic',
     name: 'Klinik Iman Medic',
     category: 'health',
+    unit: '1-03A',
     logoFile: 'iman-medic',
+    url: 'https://www.klinikimanmedicbangi.com/',
     mapUrl: 'https://share.google/Bh6pIi742UUcgF5h8',
   },
   {
     id: 'klinik-khalifah',
     name: 'Klinik Khalifah',
     category: 'health',
+    unit: '1-05',
+    url: 'https://klinikkhalifahhq.com/',
     mapUrl: 'https://share.google/NOS6GJnkkKyn78DVJ',
   },
 
@@ -135,13 +138,17 @@ export const TENANTS: readonly Tenant[] = [
     id: 'bangi-dental-cottage',
     name: 'Bangi Dental Cottage',
     category: 'dental',
+    unit: '1-13A',
     logoFile: 'dental-cottage',
+    url: 'https://lavistadental.com/',
     mapUrl: 'https://share.google/H91TLl3UHvNBAvuQv',
   },
   {
     id: 'dentacity',
     name: 'Klinik Pergigian Dentacity',
     category: 'dental',
+    unit: '2-07',
+    url: 'https://dentacity.my/',
     mapUrl: 'https://share.google/VBg8BOu20snsOYdHr',
   },
 
@@ -151,6 +158,7 @@ export const TENANTS: readonly Tenant[] = [
     name: 'Tadika Nimblebee',
     category: 'education',
     logoFile: 'nimblebee',
+    url: 'https://www.nimblebee.my/vista-bangi/',
     mapUrl: 'https://share.google/kmoenjNDifWGfty50',
   },
   {
@@ -158,6 +166,7 @@ export const TENANTS: readonly Tenant[] = [
     name: 'Al Kauthar Eduqids Playschool',
     category: 'education',
     logoFile: 'al-kauthar',
+    url: 'https://alkauthareduqids.edu.my/',
     mapUrl: 'https://share.google/jCYqmKCeLdCeKbNKF',
   },
   {
@@ -165,6 +174,7 @@ export const TENANTS: readonly Tenant[] = [
     name: 'The ChildTime Preschool',
     category: 'education',
     logoFile: 'the-child-time',
+    url: 'https://thechildtime.com/',
     mapUrl: 'https://share.google/W6wN73ooFvxIHKmu0',
   },
 
@@ -173,6 +183,7 @@ export const TENANTS: readonly Tenant[] = [
     id: 'izzy-solutions',
     name: 'IZZY Solutions',
     category: 'tech',
+    url: 'https://izzysolutions.my/',
     mapUrl: 'https://share.google/QPiY3kLoATYupFAYW',
   },
 
@@ -183,32 +194,47 @@ export const TENANTS: readonly Tenant[] = [
     category: 'retail',
     unit: '1-08 – 1-11, 2-08 – 2-11',
     url: 'https://www.eco-shop.com.my/store-locator',
+    mapUrl: 'https://share.google/P7aR3p6wsuoe4M1Za',
   },
   {
-    // Google: "99 Speedmart 2924 Vista Bangi".
     id: '99-speedmart',
     name: '99 Speedmart',
     category: 'grocery',
+    url: 'https://99speedmart.com.my/',
     mapUrl: 'https://share.google/gSTPikK5rJzkzzWiN',
   },
   {
-    // Google: "KK Mart Concept Store Residence - Vista Bangi (RVB)".
     id: 'kk-mart',
     name: 'KK Mart Concept Store',
     category: 'retail',
+    url: 'https://kksupermart.my/',
     mapUrl: 'https://share.google/r87pQWBYAxQhcVDSa',
   },
 ];
 
-/** Verified entries first, then alphabetical within each group. */
+/**
+ * Levels an outlet occupies, read from the leading digit of every lot in
+ * `unit`. `'1-08 – 1-11, 2-08 – 2-11'` yields `[1, 2]`; an absent or
+ * unparseable `unit` yields `[]`, and the card then shows no level.
+ */
+export function levelsOf(tenant: Tenant): readonly number[] {
+  if (!tenant.unit) return [];
+  const levels = new Set<number>();
+  for (const [, digit] of tenant.unit.matchAll(/(\d)\s*-\s*\d/g)) {
+    levels.add(Number(digit));
+  }
+  return [...levels].sort((a, b) => a - b);
+}
+
+/** Outlets with a known lot first, then alphabetical within each group. */
 export function sortedTenants(): readonly Tenant[] {
   return [...TENANTS].sort((a, b) => {
-    if (Boolean(a.placeholder) !== Boolean(b.placeholder)) return a.placeholder ? 1 : -1;
+    if (Boolean(a.unit) !== Boolean(b.unit)) return a.unit ? -1 : 1;
     return a.name.localeCompare(b.name);
   });
 }
 
-/** Declaration order, used to keep the filter chips stable. */
+/** Declaration order, to keep the filter chips stable. */
 const CATEGORY_ORDER: readonly TenantCategory[] = [
   'fnb',
   'grocery',
@@ -228,4 +254,5 @@ export function activeCategories(): readonly TenantCategory[] {
   return CATEGORY_ORDER.filter((c) => present.has(c));
 }
 
-export const VERIFIED_TENANT_COUNT = TENANTS.filter((t) => !t.placeholder).length;
+/** How many outlets have a confirmed lot number. */
+export const TENANTS_WITH_UNIT = TENANTS.filter((t) => t.unit).length;

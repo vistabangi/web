@@ -92,13 +92,7 @@ function OutletCard({
   strings: OutletDirectoryView['strings'];
 }) {
   return (
-    <li
-      className={`flex gap-4 rounded-card p-5 transition-colors ${
-        outlet.unverified
-          ? 'border border-dashed border-ink-200'
-          : 'border border-ink-100 bg-white hover:border-gold-300'
-      }`}
-    >
+    <li className="flex gap-4 rounded-card border border-ink-100 bg-white p-5 transition-colors hover:border-gold-300">
       <LogoCircle outlet={outlet} />
 
       <div className="min-w-0 flex-1">
@@ -156,12 +150,6 @@ function OutletCard({
                 <Icon d={PIN_PATH} size={13} strokeWidth={2} />
               </a>
             )}
-          </p>
-        )}
-
-        {outlet.unverified && (
-          <p className="mt-2.5 inline-block rounded border border-ink-200 px-1.5 py-0.5 text-[0.625rem] font-semibold tracking-[0.1em] text-ink-400 uppercase">
-            {strings.toBeConfirmed}
           </p>
         )}
       </div>

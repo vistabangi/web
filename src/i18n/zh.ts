@@ -77,10 +77,9 @@ export const zh: Dict = {
     websiteLabel: '网站',
     mapLabel: 'Google 商家',
     logoAlt: (name) => `${name} 标志`,
-    verifiedCount: (verified, total) => `${total} 家中已确认 ${verified} 家`,
-    toBeConfirmed: '待确认',
+    verifiedCount: (withLot, total) => `${total} 家中已确认 ${withLot} 家的单位编号`,
     placeholderNotice:
-      '单位编号仍在整理中。标注「待确认」的商家确实在此营业，但其单位编号或准确店名仍在向管理处核实。',
+      '此处列出的商家均在 Vista Bangi 营业。单位编号仍在整理中，因此部分商家暂不显示楼层与编号，而非填入推测。',
     emptyFiltered: '没有此类别的店铺。',
     categories: {
       fnb: '餐饮',

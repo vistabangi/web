@@ -1,5 +1,10 @@
-import { activeCategories, sortedTenants, TENANTS, VERIFIED_TENANT_COUNT } from '../data/tenants';
-import { CATEGORY_ICON } from '../components/icons';
+import {
+  activeCategories,
+  levelsOf,
+  sortedTenants,
+  TENANTS,
+  TENANTS_WITH_UNIT,
+} from '../data/tenants';
 import type { Dict } from '../i18n';
 
 /**
@@ -16,7 +21,6 @@ export interface OutletView {
   readonly name: string;
   readonly category: string;
   readonly categoryLabel: string;
-  readonly iconPath: string;
   readonly logo: string | null;
   readonly logoAlt: string;
   readonly levelLabel: string | null;
@@ -25,7 +29,6 @@ export interface OutletView {
   readonly hours: string | null;
   readonly url: string | null;
   readonly mapUrl: string | null;
-  readonly unverified: boolean;
 }
 
 export interface OutletDirectoryView {
@@ -42,7 +45,6 @@ export interface OutletDirectoryView {
     readonly callLabel: string;
     readonly websiteLabel: string;
     readonly mapLabel: string;
-    readonly toBeConfirmed: string;
     readonly emptyFiltered: string;
     readonly notice: string | null;
     readonly verifiedCount: string;
@@ -56,24 +58,26 @@ export function buildOutletDirectoryView(
   const t = dict.outlets;
 
   return {
-    outlets: sortedTenants().map(
-      (tenant): OutletView => ({
+    outlets: sortedTenants().map((tenant): OutletView => {
+      const levels = levelsOf(tenant);
+      return {
         id: tenant.id,
         name: tenant.name,
         category: tenant.category,
         categoryLabel: t.categories[tenant.category],
-        iconPath: CATEGORY_ICON[tenant.category],
         logo: shopLogos[tenant.id] ?? null,
         logoAlt: t.logoAlt(tenant.name),
-        levelLabel: tenant.floor ? t.levelLabel(tenant.floor) : null,
+        // One level reads "Level 2"; spanning both reuses the section caption,
+        // which already says "Levels 1 & 2" in every locale.
+        levelLabel:
+          levels.length === 1 ? t.levelLabel(levels[0]!) : levels.length > 1 ? t.levelsCaption : null,
         unit: tenant.unit ?? null,
         phone: tenant.phone ?? null,
         hours: tenant.hours ?? null,
         url: tenant.url ?? null,
         mapUrl: tenant.mapUrl ?? null,
-        unverified: Boolean(tenant.placeholder),
-      }),
-    ),
+      };
+    }),
     categories: activeCategories().map((c) => ({ value: c, label: t.categories[c] })),
     strings: {
       title: t.title,
@@ -86,10 +90,9 @@ export function buildOutletDirectoryView(
       callLabel: t.callLabel,
       websiteLabel: t.websiteLabel,
       mapLabel: t.mapLabel,
-      toBeConfirmed: t.toBeConfirmed,
       emptyFiltered: t.emptyFiltered,
-      notice: VERIFIED_TENANT_COUNT < TENANTS.length ? t.placeholderNotice : null,
-      verifiedCount: t.verifiedCount(VERIFIED_TENANT_COUNT, TENANTS.length),
+      notice: TENANTS_WITH_UNIT < TENANTS.length ? t.placeholderNotice : null,
+      verifiedCount: t.verifiedCount(TENANTS_WITH_UNIT, TENANTS.length),
     },
   };
 }

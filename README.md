@@ -209,45 +209,48 @@ type, borders, fills and gold-on-dark.
 ## The outlet directory
 
 Levels 1 and 2 are presented as a single **Commercial outlets** section, filtered
-by category rather than split by floor — which also avoids inventing a level for
-outlets whose floor isn't known. `floor` in
-[`src/data/tenants.ts`](src/data/tenants.ts) is optional: set it and a level
-badge appears, omit it and nothing is claimed.
+by category rather than split by floor.
 
-**13 of 15 outlets confirmed.**
+**The lot number is the single source of truth for the level.** The building
+numbers its lots `<level>-<lot>`, so the leading digit *is* the floor: `1-07` is
+Level 1, `2-07` is Level 2. `levelsOf()` in
+[`src/data/tenants.ts`](src/data/tenants.ts) derives it, and there is
+deliberately no separate `floor` field that could drift out of sync. An outlet
+spanning both levels lists each range — `'1-08 – 1-11, 2-08 – 2-11'` — and is
+shown as *Levels 1 & 2*.
 
-Names confirmed by management (each carries its Google listing link):
+All 15 outlets are real and named by management. **8 of 15 lot numbers are
+confirmed**; the rest render without a level or lot rather than with a guess.
 
-| Outlet | Category |
-| --- | --- |
-| RBS 1 Bistro | Food & drink |
-| Restoran Madame | Food & drink |
-| Klinik Iman Medic | Clinics |
-| Klinik Khalifah | Clinics |
-| Bangi Dental Cottage | Dental |
-| Klinik Pergigian Dentacity | Dental |
-| Tadika Nimblebee | Childcare & education |
-| Al Kauthar Eduqids Playschool | Childcare & education |
-| The ChildTime Preschool | Childcare & education |
-| IZZY Solutions | IT & electronics |
+| Outlet | Lot | Level | Source |
+| --- | --- | --- | --- |
+| RBS 1 Bistro | 1-02 | 1 | ⚠️ **derived** — see below |
+| Klinik Iman Medic | 1-03A | 1 | medical.my directory |
+| Klinik Khalifah | 1-05 | 1 | asiafirms / medical.my |
+| ZUS Coffee | 1-06 | 1 | zuscoffee.com outlet page |
+| CAFÉ by 7-Eleven | 1-07 | 1 | outlet listing |
+| eco-shop | 1-08 – 1-11, 2-08 – 2-11 | 1 & 2 | eco-shop.com.my store locator |
+| Bangi Dental Cottage | 1-13A | 1 | hokucare / compumed listings |
+| Klinik Pergigian Dentacity | 2-07 | 2 | dentacity.my contact page |
 
-Lot numbers confirmed from the chains' own published addresses:
+⚠️ **RBS 1 Bistro's lot is inferred, not sourced.** Richiamo Coffee published its
+address as lot 1-02, and management advised RBS took that lot over. The
+reasoning is sound but unverified — worth a glance on site.
 
-| Outlet | Lot |
-| --- | --- |
-| ZUS Coffee | 1-06 |
-| 7-Eleven | 1-07 |
-| eco-shop | 1-08 – 1-11, 2-08 – 2-11 |
+**Still needed — 7 lot numbers.** A walk along both levels with a notepad
+finishes this fastest:
 
-Still flagged **to be confirmed**: 99 Speedmart and KK Mart — both known to trade
-here, neither with a lot number yet.
+Restoran Madame · Tadika Nimblebee · Al Kauthar Eduqids Playschool ·
+The ChildTime Preschool · IZZY Solutions · 99 Speedmart · KK Mart Concept Store
 
-**Richiamo Coffee has been removed**, not listed as closed: its lot (1-02) was
-taken over by RBS 1 Bistro, and a directory shouldn't carry shut businesses.
+Add `unit: '2-04'` (or whatever it is) to the entry and the level badge, the
+sort order and the "8 of 15" counter all update themselves.
 
-To finish the directory, walk the two levels and note the lot number beside each
-name, then fill in `unit` and `floor` and delete any `placeholder: true`. The
-"13 of 15" counter and the explanatory notice both update themselves.
+Every outlet carries two links beneath its name: its own website and its Google
+listing.
+
+**Richiamo Coffee is absent, not listed as closed:** its lot 1-02 was taken over
+by RBS 1 Bistro, and a directory shouldn't carry shut businesses.
 
 > Note on level naming: chain store locators call these levels "Ground" and
 > "1st" floor, while the building's own lot numbers (`1-xx`, `2-xx`) call them

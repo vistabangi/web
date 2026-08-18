@@ -71,10 +71,9 @@ export const ms: Dict = {
     websiteLabel: 'Laman web',
     mapLabel: 'Senarai Google',
     logoAlt: (name) => `Logo ${name}`,
-    verifiedCount: (verified, total) => `${verified} daripada ${total} premis telah disemak`,
-    toBeConfirmed: 'Belum disemak',
+    verifiedCount: (withLot, total) => `${withLot} daripada ${total} nombor lot telah disahkan`,
     placeholderNotice:
-      'Nombor lot masih dikumpulkan. Entri bertanda "belum disemak" ialah perniagaan yang memang beroperasi di sini, tetapi nombor lot atau nama tepatnya masih disemak bersama pejabat pengurusan.',
+      'Setiap premis yang disenaraikan di sini memang beroperasi di Vista Bangi. Nombor lot masih dikumpulkan, jadi sesetengah entri belum memaparkan tingkat atau lot dan bukannya memberikan tekaan.',
     emptyFiltered: 'Tiada premis dalam kategori ini.',
     categories: {
       fnb: 'Makanan & minuman',

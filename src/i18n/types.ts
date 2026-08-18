@@ -87,8 +87,9 @@ export interface Dict {
     readonly websiteLabel: string;
     readonly mapLabel: string;
     readonly logoAlt: (name: string) => string;
-    readonly verifiedCount: (verified: number, total: number) => string;
-    readonly toBeConfirmed: string;
+    /** Progress on lot numbers, e.g. "8 of 15 lot numbers confirmed". */
+    readonly verifiedCount: (withLot: number, total: number) => string;
+    /** Shown while any outlet is still missing its lot number. */
     readonly placeholderNotice: string;
     readonly emptyFiltered: string;
     readonly categories: Record<TenantCategory, string>;
