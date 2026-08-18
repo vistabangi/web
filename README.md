@@ -237,7 +237,8 @@ management records. Each is marked `CONFIRM` in
 
 | Item | Currently says | Note |
 | --- | --- | --- |
-| Storeys per block | **38** | Public listings say **39**. You specified 38 — please confirm. |
+| Storeys per block | **39** | ✅ Confirmed by management, and matches public listings. The earlier 38 was a typo. |
+| Rooftop | **Level 40** | ✅ Open rooftop venue space above the residential storeys — tracked as `BUILDING.rooftopLevel`, separate from `floors`, and listed as a facility. |
 | Units per block | *not shown* | Listings say 526 (A) and 492 (B), total 1,018. Blank until verified. |
 | Address | 18, Jalan Reko, Taman Sri Reko, **43000** Kajang | ✅ Corroborated by EdgeProp, Ziba Property and the registered addresses of the podium outlets. |
 | Distances | 500 m to UKM Komuter, etc. | From listings — see `TRANSPORT`. |
@@ -266,6 +267,10 @@ management records. Each is marked `CONFIRM` in
       `OG_IMAGE = '/og.png'`. Until then `og:image` is omitted rather than broken.
 - [ ] **Proofread** `src/i18n/zh.ts` (Chinese) and `src/i18n/ta.ts` (Tamil) with
       native speakers
+- [ ] **Describe the rooftop properly** — Level 40 is currently described only as
+      "an open rooftop venue space". If it has a name, a booking process or any
+      fit-out, that is worth a sentence; if it is not open to residents at all,
+      remove `rooftopVenue` from `FACILITIES` so the page stops implying it is.
 
 Done: ✅ Airbnb search link (`SOCIAL.airbnbSearch`) — trimmed to the stable
 `/s/Vista-Bangi-Service-Apartment--Kajang--Selangor/homes` form, dropping the

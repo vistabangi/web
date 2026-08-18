@@ -102,6 +102,8 @@ export interface Dict {
     readonly sqft: (min: number, max: number) => string;
     readonly blockTitle: string;
     readonly blockBody: string;
+    /** Describes the rooftop level sitting above the residential storeys. */
+    readonly rooftop: (level: number) => string;
     readonly floorsLabel: string;
     readonly unitsLabel: string;
     readonly unitsTbc: string;

@@ -22,15 +22,23 @@ export interface Block {
 export const BUILDING = {
   name: 'Vista Bangi Service Apartment',
   shortName: 'Vista Bangi',
-  /** Storeys per residential block, as advised by management. */
-  floors: 38,
+  /**
+   * Residential storeys per block, confirmed by management — this also matches
+   * the figure public listings carry.
+   */
+  floors: 39,
+  /**
+   * The level above the residential storeys. It is an open rooftop venue space
+   * rather than residential floors, so it is tracked separately from `floors`.
+   */
+  rooftopLevel: 40,
   blocks: [
-    // CONFIRM: public listings quote 526 (A) and 492 (B) units across 39 storeys.
-    // Management advised 38 storeys, so unit counts stay null until verified.
-    { id: 'a', name: 'Block A', floors: 38, units: null },
-    { id: 'b', name: 'Block B', floors: 38, units: null },
+    // CONFIRM: public listings quote 526 (A) and 492 (B) units. Storey count is
+    // now confirmed at 39; unit counts stay null until management verifies them.
+    { id: 'a', name: 'Block A', floors: 39, units: null },
+    { id: 'b', name: 'Block B', floors: 39, units: null },
   ] satisfies readonly Block[],
-  /** Commercial podium levels that host the shop directory. */
+  /** Commercial podium levels that host the outlet directory. */
   retailLevels: [1, 2],
   tenure: 'Freehold',
   shortStayFriendly: true,

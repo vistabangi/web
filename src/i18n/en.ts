@@ -4,7 +4,7 @@ export const en: Dict = {
   meta: {
     title: 'Vista Bangi Service Apartment — Jalan Reko, Selangor',
     description:
-      'Official site of Vista Bangi Service Apartment: two 38-storey blocks on Jalan Reko, Selangor, with a two-level shop podium, full facilities, 24-hour guarded security and CCTV. Short-stay and Airbnb friendly.',
+      'Official site of Vista Bangi Service Apartment: two 39-storey blocks on Jalan Reko, Selangor, with a two-level shop podium, full facilities, 24-hour guarded security and CCTV. Short-stay and Airbnb friendly.',
     ogAlt: 'Vista Bangi Service Apartment, Jalan Reko, Selangor',
   },
   nav: {
@@ -25,7 +25,7 @@ export const en: Dict = {
     eyebrow: 'Jalan Reko · Bandar Baru Bangi · Selangor',
     title: 'Vista Bangi Service Apartment',
     subtitle:
-      'A freehold serviced residence of two 38-storey towers, sitting above its own two-level shop podium — with 24-hour guarded security, CCTV throughout, and short-stay units available.',
+      'A freehold serviced residence of two 39-storey towers, sitting above its own two-level shop podium — with 24-hour guarded security, CCTV throughout, and short-stay units available.',
     ctaPrimary: 'Find us on the map',
     ctaSecondary: 'Browse the outlets',
     statFloors: 'Storeys per block',
@@ -98,7 +98,8 @@ export const en: Dict = {
     sqft: (min, max) => `${min}–${max} sq ft`,
     blockTitle: 'Two towers, Block A and Block B',
     blockBody:
-      'Both blocks rise 38 storeys above the shared podium and facilities deck, served by their own lift cores and lobbies.',
+      'Both blocks rise 39 storeys above the shared podium and facilities deck, served by their own lift cores and lobbies.',
+    rooftop: (level) => `Level ${level}, above the residential storeys, is an open rooftop venue space.`,
     floorsLabel: 'Storeys',
     unitsLabel: 'Units',
     unitsTbc: 'To be confirmed',
@@ -111,6 +112,7 @@ export const en: Dict = {
       kidsPool: "Children's pool",
       gym: 'Gymnasium',
       multipurposeHall: 'Multipurpose hall',
+      rooftopVenue: 'Rooftop venue',
       joggingTrack: 'Jogging track',
       playground: 'Playground',
       yogaZone: 'Yoga zone',

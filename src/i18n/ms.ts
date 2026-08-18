@@ -4,7 +4,7 @@ export const ms: Dict = {
   meta: {
     title: 'Vista Bangi Service Apartment — Jalan Reko, Selangor',
     description:
-      'Laman web rasmi Vista Bangi Service Apartment: dua blok 38 tingkat di Jalan Reko, Selangor, dengan podium kedai dua tingkat, kemudahan lengkap, keselamatan berpagar 24 jam dan CCTV. Sesuai untuk penginapan jangka pendek dan Airbnb.',
+      'Laman web rasmi Vista Bangi Service Apartment: dua blok 39 tingkat di Jalan Reko, Selangor, dengan podium kedai dua tingkat, kemudahan lengkap, keselamatan berpagar 24 jam dan CCTV. Sesuai untuk penginapan jangka pendek dan Airbnb.',
     ogAlt: 'Vista Bangi Service Apartment, Jalan Reko, Selangor',
   },
   nav: {
@@ -25,7 +25,7 @@ export const ms: Dict = {
     eyebrow: 'Jalan Reko · Bandar Baru Bangi · Selangor',
     title: 'Vista Bangi Service Apartment',
     subtitle:
-      'Kediaman servis pegangan bebas dengan dua menara 38 tingkat, terletak di atas podium kedai dua tingkatnya sendiri — dengan keselamatan berkawal 24 jam, CCTV di seluruh kawasan, dan unit sewa jangka pendek yang tersedia.',
+      'Kediaman servis pegangan bebas dengan dua menara 39 tingkat, terletak di atas podium kedai dua tingkatnya sendiri — dengan keselamatan berkawal 24 jam, CCTV di seluruh kawasan, dan unit sewa jangka pendek yang tersedia.',
     ctaPrimary: 'Cari kami di peta',
     ctaSecondary: 'Lihat senarai premis',
     statFloors: 'Tingkat setiap blok',
@@ -98,7 +98,8 @@ export const ms: Dict = {
     sqft: (min, max) => `${min}–${max} kaki persegi`,
     blockTitle: 'Dua menara, Blok A dan Blok B',
     blockBody:
-      'Kedua-dua blok menjulang 38 tingkat di atas podium dan dek kemudahan yang dikongsi, dengan teras lif dan lobi tersendiri.',
+      'Kedua-dua blok menjulang 39 tingkat di atas podium dan dek kemudahan yang dikongsi, dengan teras lif dan lobi tersendiri.',
+    rooftop: (level) => `Tingkat ${level}, di atas tingkat kediaman, ialah ruang majlis rooftop terbuka.`,
     floorsLabel: 'Tingkat',
     unitsLabel: 'Unit',
     unitsTbc: 'Akan dikemas kini',
@@ -111,6 +112,7 @@ export const ms: Dict = {
       kidsPool: 'Kolam kanak-kanak',
       gym: 'Gimnasium',
       multipurposeHall: 'Dewan serbaguna',
+      rooftopVenue: 'Ruang majlis rooftop',
       joggingTrack: 'Trek joging',
       playground: 'Taman permainan',
       yogaZone: 'Zon yoga',

@@ -33,6 +33,9 @@ export function Residences({ dict }: Props) {
       <div className="mt-16 rounded-card bg-ink-900 p-8 md:p-12">
         <h3 className="display text-3xl text-gold-200">{dict.units.blockTitle}</h3>
         <p className="mt-4 max-w-2xl text-sm leading-relaxed text-ink-200">{dict.units.blockBody}</p>
+        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-400">
+          {dict.units.rooftop(BUILDING.rooftopLevel)}
+        </p>
 
         <div className="mt-9 grid gap-5 sm:grid-cols-2">
           {BUILDING.blocks.map((b) => (

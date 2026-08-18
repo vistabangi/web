@@ -12,6 +12,7 @@ export type FacilityKey =
   | 'kidsPool'
   | 'gym'
   | 'multipurposeHall'
+  | 'rooftopVenue'
   | 'joggingTrack'
   | 'playground'
   | 'yogaZone'
@@ -28,6 +29,7 @@ export const FACILITIES: readonly FacilityKey[] = [
   'kidsPool',
   'gym',
   'multipurposeHall',
+  'rooftopVenue',
   'joggingTrack',
   'playground',
   'yogaZone',

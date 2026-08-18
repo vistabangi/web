@@ -10,7 +10,7 @@ export const zh: Dict = {
   meta: {
     title: 'Vista Bangi 服务式公寓 — 雪兰莪加影 Jalan Reko',
     description:
-      'Vista Bangi 服务式公寓官方网站：位于雪兰莪加影 Jalan Reko，两栋 38 层住宅楼，楼下设有两层商铺，配套设施齐全，24 小时保安巡逻及闭路电视监控，并提供短租与 Airbnb 房源。',
+      'Vista Bangi 服务式公寓官方网站：位于雪兰莪加影 Jalan Reko，两栋 39 层住宅楼，楼下设有两层商铺，配套设施齐全，24 小时保安巡逻及闭路电视监控，并提供短租与 Airbnb 房源。',
     ogAlt: 'Vista Bangi 服务式公寓，雪兰莪加影 Jalan Reko',
   },
   nav: {
@@ -31,7 +31,7 @@ export const zh: Dict = {
     eyebrow: 'Jalan Reko · 万宜新镇 · 雪兰莪',
     title: 'Vista Bangi 服务式公寓',
     subtitle:
-      '永久地权服务式住宅，由两栋 38 层大楼组成，楼下自设两层商铺 —— 24 小时保安驻守，全区闭路电视监控，并提供短租单位。',
+      '永久地权服务式住宅，由两栋 39 层大楼组成，楼下自设两层商铺 —— 24 小时保安驻守，全区闭路电视监控，并提供短租单位。',
     ctaPrimary: '在地图上查看',
     ctaSecondary: '浏览商铺',
     statFloors: '每栋楼层数',
@@ -103,7 +103,8 @@ export const zh: Dict = {
     bathrooms: (n) => `${n} 卫浴`,
     sqft: (min, max) => `${min}–${max} 平方尺`,
     blockTitle: '双塔设计：A 座与 B 座',
-    blockBody: '两栋大楼均在共用商铺楼层与设施层之上高达 38 层，各自设有独立电梯与大堂。',
+    blockBody: '两栋大楼均在共用商铺楼层与设施层之上高达 39 层，各自设有独立电梯与大堂。',
+    rooftop: (level) => `住宅楼层之上的第 ${level} 层为开放式天台活动空间。`,
     floorsLabel: '楼层',
     unitsLabel: '单位数',
     unitsTbc: '待确认',
@@ -116,6 +117,7 @@ export const zh: Dict = {
       kidsPool: '儿童池',
       gym: '健身房',
       multipurposeHall: '多用途礼堂',
+      rooftopVenue: '天台活动空间',
       joggingTrack: '跑道',
       playground: '儿童游乐场',
       yogaZone: '瑜伽区',
