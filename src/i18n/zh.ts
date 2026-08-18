@@ -187,6 +187,10 @@ export const zh: Dict = {
     whatsapp: 'WhatsApp',
     hours: '办公时间',
     tbc: '即将公布',
+    reveal: '显示',
+    revealAria: (channel) => `显示${channel}`,
+    spamNote: '联系方式点击后才显示，以避免被自动抓取网页地址的垃圾程序收集。',
+    noscriptNote: '请启用 JavaScript 以查看电话与 WhatsApp 号码，或通过上方的电子邮件与我们联系。',
   },
   footer: {
     tagline: '服务式公寓 · 雪兰莪加影 Jalan Reko',

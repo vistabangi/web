@@ -183,6 +183,12 @@ export const ms: Dict = {
     whatsapp: 'WhatsApp',
     hours: 'Waktu pejabat',
     tbc: 'Akan diterbitkan',
+    reveal: 'Papar',
+    revealAria: (channel) => `Papar ${channel}`,
+    spamNote:
+      'Maklumat perhubungan disembunyikan sehingga anda menekannya, supaya ia tidak dapat dikutip oleh perisian automatik yang mengumpul alamat daripada laman web.',
+    noscriptNote:
+      'Sila aktifkan JavaScript untuk melihat nombor telefon dan WhatsApp, atau hubungi kami melalui e-mel di atas.',
   },
   footer: {
     tagline: 'Apartmen servis · Jalan Reko, Selangor',

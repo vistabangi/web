@@ -141,6 +141,45 @@ radio filter and a ~30-line inline script — ask and it's a small change.
 >    chunk at build time and `import.meta.url` would point at the chunk — which
 >    made every lookup silently return null.
 
+### Contact masking
+
+The phone, WhatsApp and e-mail sit behind a click and never appear as plain text
+in the served HTML. `MASK_CONTACT` in [`src/data/site.ts`](src/data/site.ts)
+turns the whole thing off in one place.
+
+It had to cover **three** places, because leaving any one of them in plain text
+would make the other two pointless:
+
+| Place | Before | Now |
+| --- | --- | --- |
+| Contact section | `tel:` / `mailto:` / `wa.me` links | masked payload, revealed on click |
+| Footer | printed the number and address | links to `#contact` instead |
+| JSON-LD | `telephone` and `email` fields | omitted while `MASK_CONTACT` is on |
+
+**What this stops:** bulk harvesters that fetch raw HTML and run a regex for
+`mailto:` links, `name@host.tld` patterns or phone-shaped digit runs. That is
+the large majority of address scraping.
+
+**What it does not stop:** anything driving a headless browser. It executes the
+same JavaScript a visitor does and reads the revealed value. This lowers spam
+volume; it is not a security control, so treat the details as public anyway.
+
+**Two costs, both deliberate:**
+
+1. **Search engines lose the contact fields.** `telephone` and `email` are gone
+   from the structured data, so they cannot appear in a rich result. The address
+   and everything else still do. Flip `MASK_CONTACT` to `false` to restore them.
+2. **The phone is unavailable without JavaScript.** The `<noscript>` block gives
+   the e-mail in `[at]`/`[dot]` form — readable by a person, invisible to a
+   regex — but *not* the number, because `noscript` markup sits in the served
+   HTML like anything else and a scraper reads it whether or not it runs
+   scripts. Any human-readable phone number is digit-matchable, so there is no
+   way to print it there safely.
+
+Encoding is in [`src/lib/contactMask.ts`](src/lib/contactMask.ts) — reversed hex
+character codes, deliberately dependency-free and pure JavaScript so the same
+module masks on the server and unmasks in the browser.
+
 ### Fonts
 
 Self-hosted via Fontsource — no Google Fonts request, so no third-party call:

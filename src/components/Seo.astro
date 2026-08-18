@@ -1,6 +1,15 @@
 ---
 import { canonicalUrl, HTML_LANG, LOCALES, type Dict, type Locale } from '../i18n';
-import { ADDRESS, BUILDING, CONTACT, COORDINATES, OG_IMAGE, SECURITY, SITE_URL } from '../data/site';
+import {
+  ADDRESS,
+  BUILDING,
+  CONTACT,
+  COORDINATES,
+  MASK_CONTACT,
+  OG_IMAGE,
+  SECURITY,
+  SITE_URL,
+} from '../data/site';
 
 interface Props {
   locale: Locale;
@@ -33,8 +42,14 @@ const jsonLd = {
   ...(COORDINATES
     ? { geo: { '@type': 'GeoCoordinates', latitude: COORDINATES.lat, longitude: COORDINATES.lng } }
     : {}),
-  ...(CONTACT.managementPhone ? { telephone: CONTACT.managementPhone } : {}),
-  ...(CONTACT.managementEmail ? { email: CONTACT.managementEmail } : {}),
+  // Structured data is machine-readable by definition, so publishing the phone
+  // and e-mail here would hand them to any scraper that parses JSON-LD and
+  // undo the click-to-reveal entirely. Omitted while MASK_CONTACT is on.
+  //
+  // Trade-off: search engines lose the contact fields for rich results. Set
+  // MASK_CONTACT to false in src/data/site.ts to publish them again.
+  ...(!MASK_CONTACT && CONTACT.managementPhone ? { telephone: CONTACT.managementPhone } : {}),
+  ...(!MASK_CONTACT && CONTACT.managementEmail ? { email: CONTACT.managementEmail } : {}),
   amenityFeature: [
     ...(SECURITY.guarded24h
       ? [{ '@type': 'LocationFeatureSpecification', name: '24-hour security', value: true }]

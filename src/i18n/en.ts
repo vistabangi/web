@@ -183,6 +183,12 @@ export const en: Dict = {
     whatsapp: 'WhatsApp',
     hours: 'Office hours',
     tbc: 'To be published',
+    reveal: 'Show',
+    revealAria: (channel) => `Show ${channel}`,
+    spamNote:
+      'Contact details are hidden until you tap, which keeps them out of reach of the automated scrapers that harvest addresses from web pages.',
+    noscriptNote:
+      'Please enable JavaScript to see the phone and WhatsApp number, or reach us by e-mail above.',
   },
   footer: {
     tagline: 'Service apartment · Jalan Reko, Selangor',

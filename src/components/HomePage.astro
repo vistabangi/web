@@ -18,10 +18,13 @@ import { Location } from './Location';
 import { CopyAddressButton } from './CopyAddressButton';
 import { ShortStay } from './ShortStay';
 import { Contact } from './Contact';
+import { ContactChannels, type ChannelRow } from './ContactChannels';
 import { getDict, type Locale } from '../i18n';
 import { resolveBrandAssets, resolveShopLogos } from '../lib/assets';
 import { buildOutletDirectoryView } from '../lib/shopView';
 import { COPYABLE_ADDRESS } from '../lib/maps';
+import { maskValue } from '../lib/contactMask';
+import { CONTACT } from '../data/site';
 
 interface Props {
   locale: Locale;
@@ -38,6 +41,33 @@ const shopLogos = resolveShopLogos();
 // Resolved server-side into plain strings, because island props are serialized
 // to JSON and `dict` contains functions. See src/lib/shopView.ts.
 const outletView = buildOutletDirectoryView(dict, shopLogos);
+
+// Masked here, on the server: only the encoded payload is serialized into the
+// island props, so no plain phone number or address reaches the HTML. Channels
+// that are not configured are simply omitted.
+const channelRows: ChannelRow[] = [
+  CONTACT.managementPhone && {
+    key: 'phone',
+    label: dict.contact.phone,
+    kind: 'tel' as const,
+    masked: maskValue(CONTACT.managementPhone),
+    revealAria: dict.contact.revealAria(dict.contact.phone),
+  },
+  CONTACT.whatsapp && {
+    key: 'whatsapp',
+    label: dict.contact.whatsapp,
+    kind: 'whatsapp' as const,
+    masked: maskValue(CONTACT.whatsapp),
+    revealAria: dict.contact.revealAria(dict.contact.whatsapp),
+  },
+  CONTACT.managementEmail && {
+    key: 'email',
+    label: dict.contact.email,
+    kind: 'mailto' as const,
+    masked: maskValue(CONTACT.managementEmail),
+    revealAria: dict.contact.revealAria(dict.contact.email),
+  },
+].filter((row): row is ChannelRow => Boolean(row));
 ---
 
 <Hero dict={dict} photo={background} />
@@ -56,4 +86,15 @@ const outletView = buildOutletDirectoryView(dict, shopLogos);
   />
 </Location>
 <ShortStay dict={dict} />
-<Contact dict={dict} />
+<Contact dict={dict}>
+  <ContactChannels
+    slot="channels"
+    client:visible
+    rows={channelRows}
+    hoursLabel={dict.contact.hours}
+    hoursValue={CONTACT.officeHours}
+    reveal={dict.contact.reveal}
+    spamNote={dict.contact.spamNote}
+    tbc={dict.contact.tbc}
+  />
+</Contact>

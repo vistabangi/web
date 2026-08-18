@@ -1,4 +1,4 @@
-import { ADDRESS_LINE, CONTACT, SPONSOR } from '../data/site';
+import { ADDRESS_LINE, SPONSOR } from '../data/site';
 import { Wordmark } from './Wordmark';
 import { localeHref, LOCALES, LOCALE_NAMES, type Dict, type Locale } from '../i18n';
 
@@ -31,26 +31,20 @@ export function Footer({ locale, dict, logo, year }: Props) {
           <address className="mt-4 text-sm leading-relaxed text-ink-200 not-italic">
             {ADDRESS_LINE}
           </address>
-          {CONTACT.managementPhone && (
-            <p className="mt-3.5 text-sm">
-              <a
-                className="text-ink-100 underline decoration-gold-600 underline-offset-4 hover:text-gold-300"
-                href={`tel:${CONTACT.managementPhone.replace(/\s/g, '')}`}
-              >
-                {CONTACT.managementPhone}
-              </a>
-            </p>
-          )}
-          {CONTACT.managementEmail && (
-            <p className="text-sm">
-              <a
-                className="text-ink-100 underline decoration-gold-600 underline-offset-4 hover:text-gold-300"
-                href={`mailto:${CONTACT.managementEmail}`}
-              >
-                {CONTACT.managementEmail}
-              </a>
-            </p>
-          )}
+          {/*
+            The number and address deliberately do NOT appear here. Masking them
+            in the contact section while printing them in the footer would leave
+            them in the served HTML anyway, defeating the point — so the footer
+            links through to the reveal instead.
+          */}
+          <p className="mt-4 text-sm">
+            <a
+              href="#contact"
+              className="text-ink-100 underline decoration-gold-600 underline-offset-4 hover:text-gold-300"
+            >
+              {dict.nav.contact}
+            </a>
+          </p>
         </div>
 
         <nav aria-labelledby="footer-sections">

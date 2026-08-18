@@ -150,6 +150,14 @@ export interface Dict {
     readonly whatsapp: string;
     readonly hours: string;
     readonly tbc: string;
+    /** Label on the click-to-reveal button. */
+    readonly reveal: string;
+    /** Accessible name for that button, e.g. "Show phone number". */
+    readonly revealAria: (channel: string) => string;
+    /** Explains why the details start hidden. */
+    readonly spamNote: string;
+    /** Shown only when JavaScript is unavailable, so reveal cannot work. */
+    readonly noscriptNote: string;
   };
   readonly footer: {
     readonly tagline: string;

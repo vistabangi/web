@@ -126,6 +126,20 @@ export const CONTACT = {
   officeHours: '9:00 AM – 5:30 PM' as string | null,
 } as const;
 
+/**
+ * Hide the phone, WhatsApp and e-mail behind a click, and keep them out of the
+ * served HTML until then.
+ *
+ * When true the details are masked in the contact section, omitted from the
+ * footer, and left out of the JSON-LD — all three, because leaving any one of
+ * them in plain text would make the other two pointless.
+ *
+ * Cost: search engines no longer see `telephone`/`email` in the structured
+ * data, so those fields drop out of any rich result. Set to false to publish
+ * them again. See src/lib/contactMask.ts for what this does and does not stop.
+ */
+export const MASK_CONTACT = true;
+
 /** Site sponsor, credited in the footer and on the splash screen. */
 export const SPONSOR = {
   name: 'Al Fateh Digital',
