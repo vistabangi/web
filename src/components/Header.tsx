@@ -25,7 +25,7 @@ export function Header({ locale, dict, logo }: Props) {
         <a href={localeHref(locale)} className="flex items-center">
           {/* The crest is portrait-ish (2048×1588) and carries the wordmark, so
               it needs more height than a typical logotype to stay legible. */}
-          <Wordmark logo={logo} alt={dict.hero.logoAlt} height={68} tone="dark" />
+          <Wordmark logo={logo} alt={dict.hero.logoAlt} height={76} tone="dark" />
         </a>
 
         <nav aria-label={dict.nav.menu} className="hidden items-center gap-0.5 xl:flex">
